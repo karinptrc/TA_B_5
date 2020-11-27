@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class PageController {
     @Autowired
@@ -14,6 +16,7 @@ public class PageController {
     @RequestMapping("/")
     private String home(Model model){
         model.addAttribute("listRole", roleService.findAll());
+        model.addAttribute("dateTime", LocalDateTime.now());
         return "halaman-utama";
     }
 

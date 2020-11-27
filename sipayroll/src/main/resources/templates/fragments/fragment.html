@@ -28,16 +28,17 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="navbar-item"><a type="submit" class="nav-link text-light">  </a></li>
-                <li class="nav-item"><a type="submit" class="nav-link text-light">  </a></li>
-                <li class="nav-item"><a type="submit" class="nav-link text-light">  </a></li>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item nav-link active text-secondary" th:href="@{/}"> Halaman Utama <span class="sr-only">(current)</span></li>
+                <li class="navbar-item"><a type="submit" class="nav-link text-light"> Gaji </a></li>
+                <li class="nav-item"><a type="submit" class="nav-link text-light"> Lembur </a></li>
+                <li class="nav-item"><a type="submit" class="nav-link text-light"> Bonus </a></li>
             </ul>
             <ul class="navbar-nav">
-                <a th:text="${pagetitle}"></a>
+                <a class="nav-item text-light" th:text="${pagetitle}"></a>
             </ul>
             <ul class="navbar-nav pull-right">
-                <a class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
+                <a class="nav-item nav-link active text-light" th:href="@{/logout}">Logout</a>
             </ul>
         </div>
     </nav>

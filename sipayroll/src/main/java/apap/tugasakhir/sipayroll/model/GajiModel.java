@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="gaji")
@@ -26,7 +27,8 @@ public class GajiModel {
 
     @NotNull
     @Column(name = "tanggalMasuk")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+//    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate tanggalMasuk;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -45,6 +47,12 @@ public class GajiModel {
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
     @JsonIgnore
     private UserModel user;
+
+
+    @OneToMany(mappedBy = "gaji", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<LemburModel> listLembur;
+
+
 
     public Long getId() {
         return id;

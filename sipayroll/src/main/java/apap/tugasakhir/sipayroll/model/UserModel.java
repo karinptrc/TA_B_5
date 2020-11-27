@@ -28,10 +28,7 @@ public class UserModel implements Serializable {
     @Column(name="password", nullable = false)
     private String password;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="id_gaji", referencedColumnName = "id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @OneToOne(mappedBy = "user")
     private GajiModel gaji;
 
     @ManyToOne(fetch = FetchType.EAGER)

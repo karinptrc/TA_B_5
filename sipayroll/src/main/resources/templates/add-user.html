@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title> Add User </title>
+    <object th:include = "fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include = "fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-6">
+        <div class = "card">
+            <div class="card-header">Tambah User Baru</div>
+            <div class="card-body">
+                <div th:if="${berhasil}">
+                    <h4 th:text="${message}" style="color: lightseagreen"></h4>
+                </div>
+                <form th:action="@{/user/add-user}" method="POST">
+                    <label>User Name</label>
+                    <input type="text" name="username" class="form-control" />
+                    <!--                            <label>Password</label>-->
+                    <!--                            <input type="password" name="password" class="form-control" />-->
+                    <label>Password Baru</label>
+                    <input type="password" name="password" class="form-control" pattern="(?=.*\d)(?=.*[A-Za-z]).{8,}"/>
+                    <small class="form-text text-muted">Password harus mengandung satu angka, satu huruf, dan minimal 8 karakter.</small>
+
+                    <label>Role</label>
+                    <select name="role" class="form-control">
+                        <option selected value =""> -- Pilih Role -- </option>
+                        <option th:each="role : ${listRole}" th:value="${role.id}" th:text="${role.role}"></option>
+                    </select>
+
+                    <br>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

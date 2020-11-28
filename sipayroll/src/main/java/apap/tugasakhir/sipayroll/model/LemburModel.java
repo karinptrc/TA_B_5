@@ -17,7 +17,7 @@ import java.util.List;
 public class LemburModel implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
@@ -43,5 +43,51 @@ public class LemburModel implements Serializable{
     @JsonIgnore
     private GajiModel gaji;
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getWaktuMulai() {
+        return waktuMulai;
+    }
+
+    public void setWaktuMulai(Date waktuMulai) {
+        this.waktuMulai = waktuMulai;
+    }
+
+    public Date getWaktuSelesai() {
+        return waktuSelesai;
+    }
+
+    public void setWaktuSelesai(Date waktuSelesai) {
+        this.waktuSelesai = waktuSelesai;
+    }
+
+    public Integer getKompensasiPerJam() {
+        return kompensasiPerJam;
+    }
+
+    public void setKompensasiPerJam(Integer kompensasiPerJam) {
+        this.kompensasiPerJam = kompensasiPerJam;
+    }
+
+    public Integer getStatusPersetujuan() {
+        return statusPersetujuan;
+    }
+
+    public void setStatusPersetujuan(Integer statusPersetujuan) {
+        this.statusPersetujuan = statusPersetujuan;
+    }
+
+    public GajiModel getGaji() {
+        return gaji;
+    }
+
+    public void setGaji(GajiModel gaji) {
+        this.gaji = gaji;
+    }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 public class GajiModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotNull
     @Column(name = "gajiPokok", nullable = false)
@@ -45,20 +45,18 @@ public class GajiModel {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private UserModel user;
-
 
     @OneToMany(mappedBy = "gaji", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<LemburModel> listLembur;
 
-
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -26,18 +26,18 @@ public class GajiController {
 
     @GetMapping("/gaji/add")
     public String addGajiFormPage(HttpServletRequest request, Model model){
-        List<UserModel> user = userService.getUserList();
-        model.addAttribute("user",user);
+        List<UserModel> listUser = userService.getUserList();
+        model.addAttribute("listUser", listUser);
         return "form-add-gaji";
     }
 
     @PostMapping("/gaji/add")
     public String addGajiSubmit(@ModelAttribute GajiModel gaji, Model model){
-        UserModel user = userService.findUserByUsername(
+        UserModel user_pengaju = userService.findUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
         gaji.setStatusPersetujuan(0);
         gaji.setPenyetuju(null);
-        gaji.setPengaju(user);
+        gaji.setPengaju(user_pengaju);
         gajiService.addGaji(gaji);
         model.addAttribute("gaji", gaji);
         return "add-gaji";

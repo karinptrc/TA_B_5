@@ -15,11 +15,11 @@ import java.io.Serializable;
 public class BonusModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotNull
     @Column(name="jumlah_bonus", nullable = false)
-    private Long jumlahBonus;
+    private Integer jumlahBonus;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_gaji", referencedColumnName = "id", nullable = false)
@@ -33,19 +33,19 @@ public class BonusModel implements Serializable {
     @JsonIgnore
     private JenisBonusModel jenis;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getJumlahBonus() {
+    public Integer getJumlahBonus() {
         return jumlahBonus;
     }
 
-    public void setJumlahBonus(Long jumlahBonus) {
+    public void setJumlahBonus(Integer jumlahBonus) {
         this.jumlahBonus = jumlahBonus;
     }
 

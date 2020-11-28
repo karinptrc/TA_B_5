@@ -13,7 +13,5 @@ public class GajiServiceImpl implements GajiService{
     GajiDb gajiDb;
 
     @Override
-    public void addGaji(GajiModel gaji) {
-        gajiDb.save(gaji);
-    }
+    public void addGaji(GajiModel gaji) { gajiDb.save(gaji); }
 }

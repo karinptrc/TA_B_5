@@ -17,7 +17,7 @@
                 UUID User <br>
                 <select name="user" class="form-control">
                     <option selected disabled>UUID</option>
-                    <option th:each="user, iterationStatus : ${user}" th:text="${user.id}" th:value="${user.id}"></option>
+                    <option th:each="user, iterationStatus : ${listUser}" th:text="${user.id}" th:value="${user.id}"></option>
                 </select>
                 <br>
                 Gaji Pokok <br>

@@ -35,6 +35,7 @@ public class GajiServiceImpl implements GajiService{
             targetGaji.setStatusPersetujuan(0);
             targetGaji.setPengaju(user_pengaju);
             targetGaji.setPenyetuju(null);
+            gajiDb.save(targetGaji);
             return targetGaji;
         }catch (NullPointerException nullPointerException){
             return null;
@@ -44,5 +45,6 @@ public class GajiServiceImpl implements GajiService{
     @Override
     public void deleteGaji(GajiModel gaji) {
         gajiDb.delete(gaji);
+        System.out.println("hapus");
     }
 }

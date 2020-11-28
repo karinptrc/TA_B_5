@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +32,7 @@ public class GajiController {
         return "form-add-gaji";
     }
     @PostMapping("/gaji/add")
-    public String addGajiSubmit(@ModelAttribute GajiModel gaji, Model model){
+    public String addGajiSubmit(@ModelAttribute GajiModel gaji, RedirectAttributes redir){
         UserModel user_pengaju = userService.findUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
         gaji.setPengaju(user_pengaju);
@@ -39,9 +40,9 @@ public class GajiController {
         gaji.setPenyetuju(null);
         boolean berhasil = true;
         gajiService.addGaji(gaji);
-        model.addAttribute("gaji", gaji);
-        model.addAttribute("berhasil",berhasil);
-        return "form-add-gaji";
+        redir.addFlashAttribute("gaji", gaji);
+        redir.addFlashAttribute("berhasil",berhasil);
+        return "redirect:/gaji/add";
     }
     @GetMapping("/gaji/change/{id}")
     public String changeGajiFormPage(@PathVariable Integer id, Model model) {
@@ -53,12 +54,12 @@ public class GajiController {
     }
 
     @PostMapping("/gaji/change")
-    public String changeGajiFormSubmit(@ModelAttribute GajiModel gaji, Model model) {
+    public String changeGajiFormSubmit(@ModelAttribute GajiModel gaji, RedirectAttributes redir) {
         GajiModel gajiUpdated = gajiService.updateGaji(gaji);
         boolean berhasil = true;
-        model.addAttribute("gaji", gaji);
-        model.addAttribute("berhasil", berhasil);
-        return "form-update-gaji";
+        redir.addFlashAttribute("gaji", gaji);
+        redir.addFlashAttribute("berhasil", berhasil);
+        return "redirect:/gaji/change/"+gaji.getId();
     }
 
     @RequestMapping("gaji/delete/{id}")

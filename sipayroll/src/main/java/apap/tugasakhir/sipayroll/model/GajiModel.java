@@ -45,7 +45,7 @@ public class GajiModel {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore
     private UserModel user;
 

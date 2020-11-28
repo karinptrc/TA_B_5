@@ -43,9 +43,8 @@ public class GajiModel {
     @JsonIgnore
     private UserModel pengaju;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private UserModel user;
 

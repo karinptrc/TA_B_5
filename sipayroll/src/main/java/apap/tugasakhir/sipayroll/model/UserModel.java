@@ -29,6 +29,7 @@ public class UserModel implements Serializable {
     private String password;
 
     @OneToOne(mappedBy = "user")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private GajiModel gaji;
 
     @ManyToOne(fetch = FetchType.EAGER)

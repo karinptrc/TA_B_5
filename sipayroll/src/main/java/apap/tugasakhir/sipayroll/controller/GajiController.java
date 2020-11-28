@@ -25,22 +25,51 @@ public class GajiController {
 
 
     @GetMapping("/gaji/add")
-    public String addGajiFormPage(HttpServletRequest request, Model model){
+    public String addGajiFormPage(Model model){
         List<UserModel> listUser = userService.getUserList();
         model.addAttribute("listUser", listUser);
         return "form-add-gaji";
     }
-
     @PostMapping("/gaji/add")
     public String addGajiSubmit(@ModelAttribute GajiModel gaji, Model model){
         UserModel user_pengaju = userService.findUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
+        gaji.setPengaju(user_pengaju);
         gaji.setStatusPersetujuan(0);
         gaji.setPenyetuju(null);
-        gaji.setPengaju(user_pengaju);
+        boolean berhasil = true;
         gajiService.addGaji(gaji);
         model.addAttribute("gaji", gaji);
-        return "add-gaji";
+        model.addAttribute("berhasil",berhasil);
+        return "form-add-gaji";
+    }
+    @GetMapping("/gaji/change/{id}")
+    public String changeGajiFormPage(@PathVariable Integer id, Model model) {
+        GajiModel gaji = gajiService.getGajiById(id);
+        List<UserModel> listUser = userService.getUserList();
+        model.addAttribute("gaji", gaji);
+        model.addAttribute("listUser", listUser);
+        return "form-update-gaji";
+    }
+
+    @PostMapping("/gaji/change")
+    public String changeGajiFormSubmit(@ModelAttribute GajiModel gaji, Model model) {
+        GajiModel gajiUpdated = gajiService.updateGaji(gaji);
+        boolean berhasil = true;
+        model.addAttribute("gaji", gaji);
+        model.addAttribute("berhasil", berhasil);
+        return "form-update-gaji";
+    }
+
+    @RequestMapping("gaji/delete/{id}")
+    public String deleteGaji(
+            @PathVariable(value = "id", required = true) Integer id,
+            Model model
+    ){
+        GajiModel gaji = gajiService.getGajiById(id);
+        gajiService.deleteGaji(gaji);
+        model.addAttribute("gaji",gaji);
+        return "delete-gaji";
     }
 
 }

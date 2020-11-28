@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GajiDb extends JpaRepository<GajiModel, Long> {
+public interface GajiDb extends JpaRepository<GajiModel, Integer> {
 }

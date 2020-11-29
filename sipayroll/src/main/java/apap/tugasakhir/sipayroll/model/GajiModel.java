@@ -8,13 +8,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="gaji")
 public class GajiModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotNull
     @Column(name = "gajiPokok", nullable = false)
@@ -26,7 +27,8 @@ public class GajiModel {
 
     @NotNull
     @Column(name = "tanggalMasuk")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+//    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate tanggalMasuk;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -41,16 +43,19 @@ public class GajiModel {
     @JsonIgnore
     private UserModel pengaju;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
     @JsonIgnore
     private UserModel user;
 
-    public Long getId() {
+    @OneToMany(mappedBy = "gaji", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<LemburModel> listLembur;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -28,7 +28,10 @@ public class UserModel implements Serializable {
     @Column(name="password", nullable = false)
     private String password;
 
-    @OneToOne(mappedBy = "user")
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id_gaji", referencedColumnName = "id")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private GajiModel gaji;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -31,8 +32,18 @@ public class UserModel implements Serializable {
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "id_gaji", referencedColumnName = "id")
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
+//    @JsonIgnore
     private GajiModel gaji;
+
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private List<GajiModel> listGajiDisetujui;
+
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private List<GajiModel> listGajiDiajukan;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_role", referencedColumnName = "id", nullable = false)
@@ -78,5 +89,21 @@ public class UserModel implements Serializable {
 
     public void setRole(RoleModel role) {
         this.role = role;
+    }
+
+    public List<GajiModel> getListGajiDisetujui() {
+        return listGajiDisetujui;
+    }
+
+    public void setListGajiDisetujui(List<GajiModel> listGajiDisetujui) {
+        this.listGajiDisetujui = listGajiDisetujui;
+    }
+
+    public List<GajiModel> getListGajiDiajukan() {
+        return listGajiDiajukan;
+    }
+
+    public void setListGajiDiajukan(List<GajiModel> listGajiDiajukan) {
+        this.listGajiDiajukan = listGajiDiajukan;
     }
 }

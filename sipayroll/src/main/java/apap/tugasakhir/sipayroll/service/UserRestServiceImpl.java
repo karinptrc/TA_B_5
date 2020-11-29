@@ -1,25 +1,24 @@
 package apap.tugasakhir.sipayroll.service;
 
 import apap.tugasakhir.sipayroll.model.GajiModel;
-import apap.tugasakhir.sipayroll.repository.GajiDb;
-import org.apache.tomcat.jni.Local;
+import apap.tugasakhir.sipayroll.model.UserModel;
+import apap.tugasakhir.sipayroll.repository.UserDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.List;
 
 @Service
 @Transactional
-public class GajiRestServiceImpl implements GajiRestService {
+public class UserRestServiceImpl implements UserRestService{
     @Autowired
-    GajiDb gajiDb;
+    UserDb userDb;
 
     @Override
-    public List<GajiModel> getGajiFromKaryawanLama() {
+    public List<UserModel> retrieveKaryawanLama() {
         LocalDate time = LocalDate.now().minusYears(2);
-        return gajiDb.findByTanggalMasukBefore(time);
+        return userDb.getUserModelsByGaji_TanggalMasukBefore(time);
     }
 }

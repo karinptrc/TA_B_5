@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title> Halaman Utama </title>
+
     <!--jquery, ajax, and bootstrap.js-->
     <head th:fragment="js">
-        <!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/esm/popper.min.js"></script>-->
-        <!--        <script src="https://code.jquery.com/jquery-3.4.1.min.js"-->
-        <!--                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="-->
-        <!--                crossorigin="anonymous"></script>-->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -29,13 +26,30 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item nav-link active text-secondary" th:href="@{/}"> Halaman Utama <span class="sr-only">(current)</span></li>
-                <li class="navbar-item"><a type="submit" class="nav-link text-light"> Gaji </a></li>
-                <li class="nav-item"><a type="submit" class="nav-link text-light"> Lembur </a></li>
-                <li class="nav-item"><a type="submit" class="nav-link text-light"> Bonus </a></li>
+                <li class="nav-item"><a type="submit" class="nav-link text-light" th:href="@{/}"> Halaman Utama </a></li>
+                <li class="nav-item dropdown"><a type="submit" class="nav-link text-light"> Pengguna </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" > Profil </a></li>
+                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/user/updatePassword}"> Ubah Password </a></li>
+                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/user/add}"> Tambah Pengguna </a></li>
+                    </ul>
+                </li>
+                <li class="navbar-item dropdown"><a type="submit" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Gaji </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" > Daftar Gaji </a></li>
+                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/gaji/add}"> Tambah Gaji </a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown"><a type="submit" class="nav-link text-light"> Lembur </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" > Daftar Lembur </a></li>
+                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/lembur/add}"> Tambah Lembur </a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a type="submit" class="nav-link text-light"> Data Karyawan Lama </a></li>
             </ul>
             <ul class="navbar-nav">
-                <a class="nav-item text-light" th:text="${pagetitle}"></a>
+                <li class="nav-item text-secondary" th:text="${pagetitle}"></li>
             </ul>
             <ul class="navbar-nav pull-right">
                 <a class="nav-item nav-link active text-light" th:href="@{/logout}">Logout</a>

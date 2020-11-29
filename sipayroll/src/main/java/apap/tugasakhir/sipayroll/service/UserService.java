@@ -9,4 +9,7 @@ public interface UserService {
     String encrypt(String password);
     UserModel findUserByUsername(String username);
     List<UserModel> getUserList();
+    Boolean checkIfValidOldPassword(UserModel user, String password);
+    void changePassword(UserModel user, String password);
+    Boolean checkIfValidNewPassword(String password);
 }

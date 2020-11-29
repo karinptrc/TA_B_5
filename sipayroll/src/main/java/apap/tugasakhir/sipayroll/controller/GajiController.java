@@ -44,8 +44,8 @@ public class GajiController {
         redir.addFlashAttribute("berhasil",berhasil);
         return "redirect:/gaji/add";
     }
-    @GetMapping("/gaji/change/{id}")
-    public String changeGajiFormPage(@PathVariable Integer id, Model model) {
+    @GetMapping("/gaji/update/{id}")
+    public String updateGajiFormPage(@PathVariable Integer id, Model model) {
         GajiModel gaji = gajiService.getGajiById(id);
         List<UserModel> listUser = userService.getUserList();
         model.addAttribute("gaji", gaji);
@@ -53,13 +53,13 @@ public class GajiController {
         return "form-update-gaji";
     }
 
-    @PostMapping("/gaji/change")
-    public String changeGajiFormSubmit(@ModelAttribute GajiModel gaji, RedirectAttributes redir) {
+    @PostMapping("/gaji/update")
+    public String updateGajiFormSubmit(@ModelAttribute GajiModel gaji, RedirectAttributes redir) {
         GajiModel gajiUpdated = gajiService.updateGaji(gaji);
         boolean berhasil = true;
         redir.addFlashAttribute("gaji", gaji);
         redir.addFlashAttribute("berhasil", berhasil);
-        return "redirect:/gaji/change/"+gaji.getId();
+        return "redirect:/gaji/update/"+gaji.getId();
     }
 
     @RequestMapping("gaji/delete/{id}")

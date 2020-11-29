@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Tambah Lembur</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <style>
+    .judul{
+        font-size: 20px;
+    }
+    </style>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="row" sec:authorize="hasAuthority('Karyawan')">
+<div class="container pm p-5 text-center position-relative min-vh-100">
+    <div class="shadow m-auto bg-white rounded w-50">
+    <div class="card-header bg-dark m-auto text-light p-0">
+        <a class="judul">Ubah Lembur</a>
+    </div>
+        <div class="card-body m-auto pl-2 pr-2 text-left">
+            <form th:action="@{/lembur/ubah}" th:object="${lembur}" method="POST">
+                <input type="hidden" th:field="*{id}">
+                Waktu Mulai <br>
+                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuMulai" th:value="*{{waktuMulai}}"/>
+                <br>
+                Waktu Selesai <br>
+                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuSelesai" th:value="*{{waktuSelesai}}"/>
+                <br>
+                <label for="statusPersetujuan">Status Persetujuan</label>
+                <select class="custom-select form-control" name="statusPersetujuan" th:field="*{statusPersetujuan}" disabled>
+                    <option value="0">Menunggu Persetujuan</option>
+                    <option value="1">Ditolak</option>
+                    <option value="2">Setuju</option>
+                </select>
+                <input type="hidden" name="statusPersetujuan" class="form-control" th:value="*{{statusPersetujuan}}">
+                <br>
+                <br>
+                <div class="row pb-3 pr-4 justify-content-end">
+                    <div><button type="submit" name="tambahLembur" class="bg-dark rounded text-light p-1">ubah</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <h5 th:text="${berhasil}" style="color: green;"></h5>
+</div>
+</div>
+    <div class="row" sec:authorize="hasAuthority('Kepala Departemen HR')">
+        <div class="container pm p-5 text-center position-relative min-vh-100">
+            <div class="shadow m-auto bg-white rounded w-50">
+            <div class="card-header bg-dark m-auto text-light p-0">
+                <a class="judul">Ubah Lembur</a>
+            </div>
+        <div class="card-body m-auto pl-2 pr-2 text-left">
+            <form th:action="@{/lembur/ubah}" th:object="${lembur}" method="POST">
+                <input type="hidden" th:field="*{id}">
+                Waktu Mulai <br>
+                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuMulai" th:value="*{{waktuMulai}}" readonly/>
+                <br>
+                Waktu Selesai <br>
+                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuSelesai" th:value="*{{waktuSelesai}}" readonly/>
+                <br>
+                Status Persetujuan<br>
+                <select name="statusPersetujuan" th:field="*{{statusPersetujuan}}"class="form-control">
+                    <option value="0">Menunggu Persetujuan</option>
+                    <option value="1">Ditolak</option>
+                    <option value="2">Setuju</option>
+                </select>
+                <br>
+                <div class="row pb-3 pr-4 justify-content-end">
+                    <div><button type="submit" name="tambahLembur" class="bg-dark rounded text-light p-1">Tambah</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <h5 th:text="${berhasil}" style="color: green;"></h5>
+</div>
+</div>
+    <div class="row" sec:authorize="hasAuthority('Staff Payroll')">
+        <div class="container pm p-5 text-center position-relative min-vh-100">
+            <div class="shadow m-auto bg-white rounded w-50">
+            <div class="card-header bg-dark m-auto text-light p-0">
+                <a class="judul">Ubah Lembur</a>
+            </div>
+        <div class="card-body m-auto pl-2 pr-2 text-left">
+            <form th:action="@{/lembur/ubah}" th:object="${lembur}" method="POST">
+                <input type="hidden" th:field="*{id}">
+                Waktu Mulai <br>
+                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuMulai" th:value="*{{waktuMulai}}" readonly/>
+                <br>
+                Waktu Selesai <br>
+                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuSelesai" th:value="*{{waktuSelesai}}" readonly/>
+                <br>
+                Status Persetujuan<br>
+                <select name="statusPersetujuan" th:field="*{{statusPersetujuan}}" class="form-control">
+                    <option value="0">Menunggu Persetujuan</option>
+                    <option value="1">Ditolak</option>
+                    <option value="2">Setuju</option>
+                </select>
+                <br>
+                <div class="row pb-3 pr-4 justify-content-end">
+                    <div><button type="submit" name="tambahLembur" class="bg-dark rounded text-light p-1">Tambah</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <h5 th:text="${berhasil}" style="color: green;"></h5>
+    </div>
+    </div>
+    <!-- <br> -->
+    <!-- <h5 th:text="${gagal}" style="color: red;"></h5> -->
+</div>
+
+</body>
+</html>

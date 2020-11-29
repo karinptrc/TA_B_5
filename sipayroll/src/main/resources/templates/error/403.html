@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Akses Ditolak</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <style>
+    .isi{
+        font-size: 30px;
+        font-weight: 500;
+    }
+    .isii{
+        padding-top: 4%;
+        padding-left: 27%;
+    }
+    </style>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="isii">
+    <a class="isi">Maaf Anda Tidak Memiliki Akses ke Halaman</a>
+</div>
+</body>
+</html>

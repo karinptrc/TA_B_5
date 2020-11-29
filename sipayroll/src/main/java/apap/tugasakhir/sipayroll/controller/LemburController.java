@@ -37,9 +37,8 @@ public class LemburController {
         try{
             GajiModel gaji = user.getGaji();
             lembur.setStatusPersetujuan(0);
-            // Integer hasil = lemburService.hitungKompensasi();
             lembur.setGaji(gaji);
-            lembur.setKompensasiPerJam(0);
+            lembur.setKompensasiPerJam(120000);
             lemburService.addLembur(lembur);
             model.addAttribute("lembur", lembur);
             model.addAttribute("berhasil", "Penambahan lembur berhasil!");

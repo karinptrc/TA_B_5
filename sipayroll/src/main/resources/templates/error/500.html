@@ -2,21 +2,20 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Delete Gaji</title>
+    <title>500 Internal Server Error</title>
 
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-    <nav th:replace="fragments/fragment :: navbar (pagetitle='Hapus Gaji')"></nav>
+    <nav th:replace="fragments/fragment :: navbar (pagetitle='Internal Server Error')"></nav>
     <div class="m-auto pt-5 pl-5 pr-5">
         <div class="m-auto pt-5 pl-5 pr-5">
             <div class=" m-auto pm position-relative min-vh-100 text-center pt-5 pl-5 pr-5">
-                <div class="w-75 m-auto pt-5 pl-5 pr-5"><h1 th:text="'Gaji dengan id ' + ${id} + ' berhasil dihapus.'"></h1></div>
+                <div class="w-75 m-auto pt-5 pl-5 pr-5 font-weight-bold"><h1>Maaf, terdapat kesalahan pada internal server</h1></div>
                 <div><a href="/">Kembali ke Halaman Utama</a></div>
             </div>
         </div>
     </div>
-    <footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +32,7 @@ public class LemburController {
     }
 
     @PostMapping("/lembur/add")
-    public String addLemburSubmit(@ModelAttribute LemburModel lembur, Model model){
+    public String addLemburSubmit(@ModelAttribute LemburModel lembur, RedirectAttributes redir){
         UserModel user = userService.findUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
         try{
@@ -40,33 +41,28 @@ public class LemburController {
             lembur.setGaji(gaji);
             lembur.setKompensasiPerJam(120000);
             lemburService.addLembur(lembur);
-            model.addAttribute("lembur", lembur);
-            model.addAttribute("berhasil", "Penambahan lembur berhasil!");
-            return "form-add-lembur";
+            redir.addFlashAttribute("lembur", lembur);
+            redir.addFlashAttribute("berhasil", "Penambahan lembur berhasil!");
+            return "redirect:/lembur/add";
         } catch(Exception e){
-            model.addAttribute("gagal", "ID Gaji belum terdaftar! Penambahan lembur gagal!");
-            return "form-add-lembur";
+            redir.addFlashAttribute("gagal", "ID Gaji belum terdaftar! Penambahan lembur gagal!");
+            return "redirect:/lembur/add";
 
         }
     }
 
     @GetMapping("/lembur/ubah/{id}")
-    public String ubahLemburFormPage(
-        @PathVariable Integer id,
-        Model model
-    ){
+    public String ubahLemburFormPage(@PathVariable Integer id, Model model){
         LemburModel lembur = lemburService.getLemburById(id);
         model.addAttribute("lembur", lembur);
         return "form-ubah-lembur";
     }
 
     @PostMapping("/lembur/ubah")
-    public String ubahLemburFormSubmit(
-        @ModelAttribute LemburModel lembur,
-        Model model){
+    public String ubahLemburFormSubmit(@ModelAttribute LemburModel lembur, RedirectAttributes redir){
         LemburModel lemburUpdated = lemburService.updateLembur(lembur);
-        model.addAttribute("lembur", lembur);
-        model.addAttribute("berhasil", "Lembur berhasil diubah!");
-        return "form-ubah-lembur";
+        redir.addFlashAttribute("lembur", lembur);
+        redir.addFlashAttribute("berhasil", "Lembur berhasil diubah!");
+        return "redirect:/lembur/ubah/"+lembur.getId();
     }
 }

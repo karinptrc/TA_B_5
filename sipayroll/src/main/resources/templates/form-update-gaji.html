@@ -2,41 +2,41 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Form Tambah Gaji</title>
+    <title>Form Ubah Gaji</title>
 
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
-<div class="container pm p-5 text-center position-relative min-vh-100">
-    <div class="shadow m-auto bg-white rounded w-50">
-        <div class="card-header bg-dark m-auto text-light p-0">Tambah Gaji</div>
-        <div class="card-body m-auto pl-2 pr-2 text-left">
-            <form th:action="@{/gaji/change}" th:object="${gaji}" method="POST">
-                <input type="hidden" th:field="*{id}">
-                UUID User <br>
-                <select name="user" class="form-control" th:field="*{{user}}" readonly>
-                    <option th:each="user, iterationStatus : ${listUser}" th:text="${user.id}" th:value="${user.id}"></option>
-                </select>
-                <br>
-                Gaji Pokok <br>
-                <input type = "number" class="form-control" name="gajiPokok" th:value="*{gajiPokok}"/>
-                <br>
-                Tanggal Masuk <br>
-                <input type = "date" class="form-control"  name="tanggalMasuk" th:value="*{{tanggalMasuk}}" readonly/>
-                <br>
-                <div class="row pb-3 pr-4 justify-content-end">
-                    <div class="pr-1"><button type="submit" name="batalTambah" class="bg-white border-dar rounded pt-1 pb-1 pl-3 pr-3">Batal</button></div>
-                    <div><button type="submit" name="ubahGaji" class="bg-dark rounded text-light p-1">Ubah</button></div>
+    <nav th:replace="fragments/fragment :: navbar (pagetitle='Ubah Gaji')"></nav>
+    <div class="container pm p-5 text-center position-relative min-vh-100">
+        <div class="shadow m-auto bg-white rounded w-50">
+            <div class="card-header bg-dark m-auto text-light p-0">Ubah Gaji</div>
+            <div class="card-body m-auto pl-2 pr-2 text-left">
+                <form th:action="@{/gaji/update}" th:object="${gaji}" method="POST">
+                    <input type="hidden" th:field="*{id}">
+                    UUID User <br>
+                    <select name="user" class="form-control" th:field="*{{user}}" readonly>
+                        <option th:each="user, iterationStatus : ${listUser}" th:text="${user.id}" th:value="${user.id}"></option>
+                    </select>
+                    <br>
+                    Gaji Pokok <br>
+                    <input type = "number" class="form-control" name="gajiPokok" th:value="*{gajiPokok}"/>
+                    <br>
+                    Tanggal Masuk <br>
+                    <input type = "date" class="form-control"  name="tanggalMasuk" th:value="*{{tanggalMasuk}}" readonly/>
+                    <br>
+                    <div class="row pb-3 pr-4 justify-content-end">
+                        <div class="pr-1"><button type="submit" name="batalTambah" class="bg-white border-dar rounded pt-1 pb-1 pl-3 pr-3">Batal</button></div>
+                        <div><button type="submit" name="ubahGaji" class="bg-dark rounded text-light p-1">Simpan</button></div>
+                    </div>
+                </form>
+                <div th:if = "${berhasil}">
+                    <h4 style="color: lightseagreen">Gaji berhasil diubah!</h4>
                 </div>
-            </form>
-            <div th:if = "${berhasil}">
-                <h4 style="color: lightseagreen">Gaji berhasil diubah!</h4>
             </div>
         </div>
     </div>
-</div>
-<footer th:replace="fragments/fragment :: footer"></footer>
+    <footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 </html>

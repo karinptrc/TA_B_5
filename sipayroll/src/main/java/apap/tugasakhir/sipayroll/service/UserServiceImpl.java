@@ -36,4 +36,26 @@ public class UserServiceImpl implements UserService{
     public List<UserModel> getUserList() {
         return userDb.findAll();
     }
+
+    @Override
+    public Boolean checkIfValidOldPassword(UserModel user, String password) {
+        return new BCryptPasswordEncoder().matches(password, user.getPassword());
+    }
+
+    @Override
+    public void changePassword(UserModel user, String password) {
+        String hashedPassword = encrypt(password);
+        user.setPassword(hashedPassword);
+        userDb.save(user);
+    }
+
+    @Override
+    public Boolean checkIfValidNewPassword(String password) {
+        String huruf = ".*[A-Za-z].*";
+        String angka = ".*[0-9].*";
+        if(password.length()<8 || !password.matches(huruf) || !password.matches(angka)){
+            return false;
+        }
+        return true;
+    }
 }

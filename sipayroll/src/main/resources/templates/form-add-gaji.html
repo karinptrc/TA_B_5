@@ -8,35 +8,38 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
-<div class="container pm p-5 text-center position-relative min-vh-100">
-    <div class="shadow m-auto bg-white rounded w-50">
-        <div class="card-header bg-dark m-auto text-light p-0">Tambah Gaji</div>
-        <div class="card-body m-auto pl-2 pr-2 text-left">
-            <form th:action="@{/gaji/add}" th:object="${gaji}" method="POST">
-                UUID User <br>
-                <select name="user" class="form-control">
-                    <option selected disabled>UUID</option>
-                    <option th:each="user, iterationStatus : ${listUser}" th:text="${user.id}" th:value="${user.id}"></option>
-                </select>
-                <br>
-                Gaji Pokok <br>
-                <input type = "number" class="form-control" name="gajiPokok" placeholder="Masukan Gaji Pokok"/>
-                <br>
-                Tanggal Masuk <br>
-                <input type = "date" class="form-control"  name="tanggalMasuk"/>
-                <br>
-                <div class="row pb-3 pr-4 justify-content-end">
-                    <div class="pr-1"><button type="submit" name="batalTambah" class="bg-white border-dar rounded pt-1 pb-1 pl-3 pr-3">Batal</button></div>
-                    <div><button type="submit" name="tambahGaji" class="bg-dark rounded text-light p-1">Tambah</button></div>
+    <nav th:replace="fragments/fragment :: navbar (pagetitle='Tambah Gaji')"></nav>
+    <div class="container pm p-5 text-center position-relative min-vh-100">
+        <div class="shadow m-auto bg-white rounded w-50">
+            <div class="card-header bg-dark m-auto text-light p-0">Tambah Gaji</div>
+            <div class="card-body m-auto pl-2 pr-2 text-left">
+                <form th:action="@{/gaji/add}" th:object="${gaji}" method="POST">
+                    UUID User <br>
+                    <select name="user" class="form-control">
+                        <option selected disabled>UUID</option>
+                        <option th:each="user, iterationStatus : ${listUser}" th:text="${user.id}" th:value="${user.id}"></option>
+                    </select>
+                    <br>
+                    Gaji Pokok <br>
+                    <input type = "number" class="form-control" name="gajiPokok" placeholder="Masukan Gaji Pokok"/>
+                    <br>
+                    Tanggal Masuk <br>
+                    <input type = "date" class="form-control"  name="tanggalMasuk"/>
+                    <br>
+                    <div class="row pb-3 pr-4 justify-content-end">
+                        <div class="pr-1"><button type="submit" name="batalTambah" class="bg-white border-dar rounded pt-1 pb-1 pl-3 pr-3">Batal</button></div>
+                        <div><button type="submit" name="tambahGaji" class="bg-dark rounded text-light p-1">Tambah</button></div>
+                    </div>
+                </form>
+                <div th:if = "${berhasil}">
+                    <h4 style="color: lightseagreen">Gaji berhasil ditambahkan!</h4>
                 </div>
-            </form>
-            <div th:if = "${berhasil}">
-                <h4 style="color: lightseagreen">Gaji berhasil ditambahkan!</h4>
+                <div th:if = "${gagal}">
+                    <h4 style="color: red">Gagal menambahkan, UUID User tersebut telah memiliki gaji!</h4>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<footer th:replace="fragments/fragment :: footer"></footer>
+    <footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 </html>

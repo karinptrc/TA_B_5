@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,7 +21,13 @@ public class GajiServiceImpl implements GajiService{
     private UserService userService;
 
     @Override
-    public void addGaji(GajiModel gaji) { gajiDb.save(gaji); }
+    public void addGaji(GajiModel gaji) {
+        try{
+            gajiDb.save(gaji);
+        }catch(Exception e){
+            System.out.println("gagal");
+        }
+    }
 
     @Override
     public GajiModel getGajiById(Integer id) {
@@ -49,4 +56,17 @@ public class GajiServiceImpl implements GajiService{
         gajiDb.delete(gaji);
         System.out.println("hapus");
     }
+
+    @Override
+    public List<GajiModel> getGajiList() {
+        return gajiDb.findAll();
+    }
+
+//    @Override
+//    public boolean checkListIdUser(String id){
+//        List<GajiModel> listIdUser =gajiDb.findAllByUserId(id);
+//        listIdUser.con
+//    }
+
+
 }

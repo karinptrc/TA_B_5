@@ -31,7 +31,7 @@ public class UserModel implements Serializable {
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "id_gaji", referencedColumnName = "id")
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private GajiModel gaji;
 
     @OneToMany(mappedBy="penyetuju", fetch = FetchType.LAZY)

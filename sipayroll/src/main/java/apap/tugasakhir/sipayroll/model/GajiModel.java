@@ -44,7 +44,7 @@ public class GajiModel {
     private UserModel pengaju;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false, unique = true)
     @JsonIgnore
     private UserModel user;
 

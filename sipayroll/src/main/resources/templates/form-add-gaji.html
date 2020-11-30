@@ -34,6 +34,9 @@
                 <div th:if = "${berhasil}">
                     <h4 style="color: lightseagreen">Gaji berhasil ditambahkan!</h4>
                 </div>
+                <div th:if = "${gagal}">
+                    <h4 style="color: red">Gagal menambahkan, UUID User tersebut telah memiliki gaji!</h4>
+                </div>
             </div>
         </div>
     </div>

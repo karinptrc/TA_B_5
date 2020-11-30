@@ -32,15 +32,14 @@ public class UserModel implements Serializable {
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "id_gaji", referencedColumnName = "id")
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JsonIgnore
     private GajiModel gaji;
 
-    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="penyetuju", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private List<GajiModel> listGajiDisetujui;
 
-    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="pengaju", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private List<GajiModel> listGajiDiajukan;

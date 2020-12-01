@@ -1,6 +1,7 @@
 package apap.tugasakhir.sipayroll.controller;
 import apap.tugasakhir.sipayroll.model.GajiModel;
 import apap.tugasakhir.sipayroll.model.UserModel;
+import apap.tugasakhir.sipayroll.repository.GajiDb;
 import apap.tugasakhir.sipayroll.service.GajiService;
 import apap.tugasakhir.sipayroll.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class GajiController {
     @Autowired
     private GajiService gajiService;
 
+    @Autowired
+    GajiDb gajiDb;
+
 
     @GetMapping("/gaji/add")
     public String addGajiFormPage(Model model){
@@ -33,8 +37,16 @@ public class GajiController {
     }
     @PostMapping("/gaji/add")
     public String addGajiSubmit(@ModelAttribute GajiModel gaji, RedirectAttributes redir){
-        UserModel user_pengaju = userService.findUserByUsername(
-                SecurityContextHolder.getContext().getAuthentication().getName());
+        UserModel user_pengaju = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<GajiModel> listGaji = gajiService.getGajiList();
+        for(int i = 0; i < listGaji.size(); i++){
+            if(listGaji.get(i).getUser() == gaji.getUser()){
+                System.out.print("masuk sini");
+                boolean gagal = true;
+                redir.addFlashAttribute("gagal",gagal);
+                return "redirect:/gaji/add";
+            }
+        }
         gaji.setPengaju(user_pengaju);
         gaji.setStatusPersetujuan(0);
         gaji.setPenyetuju(null);

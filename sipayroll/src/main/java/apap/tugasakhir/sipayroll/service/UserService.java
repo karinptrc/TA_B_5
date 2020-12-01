@@ -12,4 +12,5 @@ public interface UserService {
     Boolean checkIfValidOldPassword(UserModel user, String password);
     void changePassword(UserModel user, String password);
     Boolean checkIfValidNewPassword(String password);
+    Boolean checkIfUsernameIsUsed(String username);
 }

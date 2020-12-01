@@ -58,4 +58,13 @@ public class UserServiceImpl implements UserService{
         }
         return true;
     }
+
+    @Override
+    public Boolean checkIfUsernameIsUsed(String username) {
+        UserModel usernameUsed = userDb.findByUsername(username);
+        if(usernameUsed == null){
+            return false;
+        }
+        return true;
+    }
 }

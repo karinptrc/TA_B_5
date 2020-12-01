@@ -33,10 +33,19 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addUserSubmit(@ModelAttribute UserModel user, RedirectAttributes redir){
+        if(userService.checkIfUsernameIsUsed(user.getUsername())){
+            redir.addFlashAttribute("hasMessage", true);
+            redir.addFlashAttribute("message", "username " + user.getUsername() + " sudah digunakan. silahkan ubah kembali username Anda.");
+            return "redirect:/user/add";
+        }
+        if(!userService.checkIfValidNewPassword(user.getPassword())){
+            redir.addFlashAttribute("hasMessage", true);
+            redir.addFlashAttribute("message", "password invalid. password harus terdiri dari minimal 8 karakter, serta mengandung huruf dan angka.");
+            return "redirect:/user/add";
+        }
         userService.addUser(user);
-        redir.addFlashAttribute("user", user);
-        redir.addFlashAttribute("message", "Akun berhasil dibuat!");
-        redir.addFlashAttribute("berhasil", true);
+        redir.addFlashAttribute("hasMessage", true);
+        redir.addFlashAttribute("message", "user " + user.getUsername() + " berhasil ditambahkan");
         return "redirect:/user/add";
     }
 
@@ -50,16 +59,24 @@ public class UserController {
     public String changePassword(@RequestParam("oldpassword") String oldpassword,
                                  @RequestParam("password") String password,
                                  @RequestParam("confirmpassword") String confirmpassword, RedirectAttributes redir){
-        if(!password.equals(confirmpassword)){
-            redir.addFlashAttribute("hasMessage", true);
-            redir.addFlashAttribute("message", "password baru dan konfirmasi password baru tidak cocok");
-            return "redirect:/user/updatePassword";
-        }
+
         UserModel user = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
         if (!userService.checkIfValidOldPassword(user, oldpassword)) {
             redir.addFlashAttribute("hasMessage", true);
             redir.addFlashAttribute("message", "password lama invalid");
+            return "redirect:/user/updatePassword";
+        }
+
+        if(oldpassword.equals(password)){
+            redir.addFlashAttribute("hasMessage", true);
+            redir.addFlashAttribute("message", "password baru tidak boleh sama dengan password lama");
+            return "redirect:/user/updatePassword";
+        }
+
+        if(!password.equals(confirmpassword)){
+            redir.addFlashAttribute("hasMessage", true);
+            redir.addFlashAttribute("message", "password baru dan konfirmasi password baru tidak cocok");
             return "redirect:/user/updatePassword";
         }
 

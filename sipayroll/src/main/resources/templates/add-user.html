@@ -32,8 +32,8 @@
                         <button type="submit" class="btn btn-dark">Simpan</button>
                     </div>
                 </form>
-                <div th:if="${berhasil}">
-                    <h4 th:text="${message}" style="color: lightseagreen"></h4>
+                <div th:if="${hasMessage}">
+                    <h4 th:text="${message}" class="text-danger" </h4>
                 </div>
             </div>
         </div>

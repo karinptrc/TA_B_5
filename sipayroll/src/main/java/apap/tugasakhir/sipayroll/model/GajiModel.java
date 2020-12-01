@@ -29,6 +29,7 @@ public class GajiModel {
     @Column(name = "tanggalMasuk")
 //    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonIgnore
     private LocalDate tanggalMasuk;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -49,6 +50,7 @@ public class GajiModel {
     private UserModel user;
 
     @OneToMany(mappedBy = "gaji", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<LemburModel> listLembur;
 
     public Integer getId() {

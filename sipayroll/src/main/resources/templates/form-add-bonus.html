@@ -26,17 +26,17 @@
                     <option th:each="jenis, iterationStatus : ${listJenisBonus}" th:text="${jenis.nama}" th:value="${jenis.id}"></option>
                 </select>
                 <br>
+                Tanggal Diberikan <br>
+                <input type = "date" class="form-control"  name="tanggal"/>
+                <br>
                 <br><br><br><br>
                 <div class="row pb-3 pr-4 justify-content-end">
                     <div class="pr-1"><button type="submit" name="batalTambah" class="bg-white border-dar rounded pt-1 pb-1 pl-3 pr-3">Batal</button></div>
                     <div><button type="submit" name="tambahBonus" class="bg-dark rounded text-light p-1">Tambah</button></div>
                 </div>
             </form>
-            <div th:if = "${berhasil}">
-                <h4 style="color: lightseagreen">Bonus berhasil ditambahkan!</h4>
-            </div>
-            <div th:if = "${gagal}">
-                <h4 style="color: red">User telah mendapatkan bonus tersebut!</h4>
+            <div>
+                <h4 style="color: red" th:text="${pesan}"></h4>
             </div>
         </div>
     </div>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,12 +47,23 @@ public class BonusController {
                                  RedirectAttributes redir){
         System.out.println(uuid);
         System.out.println(jenisBonus);
-        Optional<UserModel> user = userService.findUserByUuid(uuid);
-        GajiModel gaji = user.get().getGaji();
-        JenisBonusModel jenis =  jenisBonusService.getJenisBonusById(jenisBonus);
-        boolean flag = bonusService.addBonus(bonus, gaji, jenis);
-        redir.addFlashAttribute("flag",flag);
-        return "redirect:/bonus/add";
+        try{
+            Optional<UserModel> user = userService.findUserByUuid(uuid);
+            GajiModel gaji = user.get().getGaji();
+            JenisBonusModel jenis =  jenisBonusService.getJenisBonusById(jenisBonus);
+            boolean flag = bonusService.addBonus(bonus, gaji, jenis);
+            String pesan = "";
+            if(flag){
+                pesan = "Bonus berhasil ditambahkan!";
+            }else {
+                pesan = "User telah mendapatkan bonus tersebut!";
+            }
+            redir.addFlashAttribute("pesan",pesan);
+            return "redirect:/bonus/add";
+        }catch (NullPointerException nullPointerException){
+            redir.addFlashAttribute("pesan","ID Gaji belum terdaftar! Penambahan bonus gagal!");
+            return "redirect:/bonus/add";
+        }
     }
 
 }

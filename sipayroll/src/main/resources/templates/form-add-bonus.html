@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Tambah Pilot</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container pm p-5 text-center position-relative min-vh-100">
+    <div class="shadow m-auto bg-white rounded w-50">
+        <div class="card-header bg-dark m-auto text-light p-0">Tambah Bonus</div>
+        <div class="card-body m-auto pl-2 pr-2 text-left">
+            <form th:action="@{/bonus/add}" th:object="${bonus}" method="POST">
+                UUID <br>
+                <select name="uuid" class="form-control">
+                    <option selected disabled>UUID</option>
+                    <option th:each="user, iterationStatus : ${listUser}" th:text="${user.id}" th:value="${user.id}"></option>
+                </select>
+                <br>
+                Jenis Bonus <br>
+                <select name="jenisBonus" class="form-control">
+                    <option selected disabled>Jenis Bonus</option>
+                    <option th:each="jenis, iterationStatus : ${listJenisBonus}" th:text="${jenis.nama}" th:value="${jenis.id}"></option>
+                </select>
+                <br>
+                <br><br><br><br>
+                <div class="row pb-3 pr-4 justify-content-end">
+                    <div class="pr-1"><button type="submit" name="batalTambah" class="bg-white border-dar rounded pt-1 pb-1 pl-3 pr-3">Batal</button></div>
+                    <div><button type="submit" name="tambahBonus" class="bg-dark rounded text-light p-1">Tambah</button></div>
+                </div>
+            </form>
+            <div th:if = "${berhasil}">
+                <h4 style="color: lightseagreen">Bonus berhasil ditambahkan!</h4>
+            </div>
+            <div th:if = "${gagal}">
+                <h4 style="color: red">User telah mendapatkan bonus tersebut!</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>

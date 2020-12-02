@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -37,5 +40,20 @@ public class LemburServiceImpl implements LemburService {
         }catch(NullPointerException nullException){
             return null;
         }
+    }
+
+    @Override
+    public Boolean bandingTanggal(Date mulai, Date selesai){
+        boolean tanggalValid;
+        String pattern = "dd-MM-yyyy";
+        DateFormat dateformat = new SimpleDateFormat(pattern);
+        String tanggalmulai= dateformat.format(mulai);
+        String tanggalselesai= dateformat.format(selesai);
+        if(tanggalmulai.equals(tanggalselesai)){
+            tanggalValid = true;
+        }else {
+            tanggalValid = false;
+        }
+        return tanggalValid;
     }
 }

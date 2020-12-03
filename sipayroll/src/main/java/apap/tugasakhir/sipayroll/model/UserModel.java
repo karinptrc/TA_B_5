@@ -27,6 +27,7 @@ public class UserModel implements Serializable {
     @NotNull
     @Lob
     @Column(name="password", nullable = false)
+    @JsonIgnore
     private String password;
 
 //    @OneToOne(cascade = CascadeType.ALL)

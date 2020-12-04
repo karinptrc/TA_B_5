@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface BonusService {
     boolean addBonus(BonusModel bonus, GajiModel gaji, JenisBonusModel jenis);
+    Integer totalBonusinMonthByGaji(GajiModel gaji);
 }

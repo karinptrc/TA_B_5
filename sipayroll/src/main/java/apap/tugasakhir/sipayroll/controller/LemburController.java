@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class LemburController {
@@ -35,8 +35,8 @@ public class LemburController {
     public String addLemburSubmit(@ModelAttribute LemburModel lembur, RedirectAttributes redir){
         UserModel user = userService.findUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
-        try{
-            GajiModel gaji = user.getGaji();
+        GajiModel gaji = user.getGaji();
+        if(lemburService.bandingTanggal(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == true){
             lembur.setStatusPersetujuan(0);
             lembur.setGaji(gaji);
             lembur.setKompensasiPerJam(120000);
@@ -44,12 +44,33 @@ public class LemburController {
             redir.addFlashAttribute("lembur", lembur);
             redir.addFlashAttribute("berhasil", "Penambahan lembur berhasil!");
             return "redirect:/lembur/add";
-        } catch(Exception e){
+        } else if(lemburService.bandingTanggal(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == false){
+            redir.addFlashAttribute("gagal", "Tanggal yang diberikan berbeda!");
+            return "redirect:/lembur/add";
+        }else{
             redir.addFlashAttribute("gagal", "ID Gaji belum terdaftar! Penambahan lembur gagal!");
             return "redirect:/lembur/add";
-
         }
     }
+        // try{
+        //     GajiModel gaji = user.getGaji();
+        //     if(lemburService.bandingTanggal(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == true){
+        //         lembur.setStatusPersetujuan(0);
+        //         lembur.setGaji(gaji);
+        //         lembur.setKompensasiPerJam(120000);
+        //         lemburService.addLembur(lembur);
+        //         redir.addFlashAttribute("lembur", lembur);
+        //         redir.addFlashAttribute("berhasil", "Penambahan lembur berhasil!");
+        //         return "redirect:/lembur/add";
+        //     } else{
+        //         redir.addFlashAttribute("gagal", "Tanggal yang diberikan berbeda!");
+        //         return "redirect:/lembur/add";
+        //     }
+        // } catch(Exception e){
+        //     redir.addFlashAttribute("gagal", "ID Gaji belum terdaftar! Penambahan lembur gagal!");
+        //     return "redirect:/lembur/add";
+
+        // }
 
     @GetMapping("/lembur/ubah/{id}")
     public String ubahLemburFormPage(@PathVariable Integer id, Model model){

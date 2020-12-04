@@ -53,6 +53,10 @@ public class GajiModel {
     @JsonIgnore
     private List<LemburModel> listLembur;
 
+    @OneToMany(mappedBy = "gaji", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<BonusModel> listBonus;
+
     public Integer getId() {
         return id;
     }
@@ -107,5 +111,21 @@ public class GajiModel {
 
     public void setUser(UserModel user) {
         this.user = user;
+    }
+
+    public List<LemburModel> getListLembur() {
+        return listLembur;
+    }
+
+    public void setListLembur(List<LemburModel> listLembur) {
+        this.listLembur = listLembur;
+    }
+
+    public List<BonusModel> getListBonus() {
+        return listBonus;
+    }
+
+    public void setListBonus(List<BonusModel> listBonus) {
+        this.listBonus = listBonus;
     }
 }

@@ -3,6 +3,7 @@ package apap.tugasakhir.sipayroll.service;
 import apap.tugasakhir.sipayroll.model.UserModel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     UserModel addUser(UserModel user);
@@ -13,4 +14,5 @@ public interface UserService {
     void changePassword(UserModel user, String password);
     Boolean checkIfValidNewPassword(String password);
     Boolean checkIfUsernameIsUsed(String username);
+    Optional<UserModel> findUserByUuid(String uuid);
 }

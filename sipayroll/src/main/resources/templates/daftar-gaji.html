@@ -10,7 +10,7 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="container p-5 m-auto position-relative min-vh-100">
-    <a th:href="@{/pilot/tambah}" class="btn btn-outline-primary bg-dark text-light mb-1"> + Tambah Pilot </a>
+    <a th:href="@{/gaji/add}" class="btn btn-outline-primary bg-dark text-light mb-1"> + Tambah Gaji </a>
     <div class="shadow m-auto bg-white rounded text-center">
         <h3 class="card-header bg-dark text-light">Daftar Gaji</h3>
         <div class="card-body">
@@ -21,8 +21,6 @@
                     <th>Nama Pegawai</th>
                     <th>Gaji Pokok</th>
                     <th>Total Pendapatan</th>
-<!--                    <th>Tanggal Lahir</th>-->
-<!--                    <th>Jenis Kelamin</th>-->
                     <th>Action</th>
                     <th></th>
                     <th></th>
@@ -34,9 +32,9 @@
                     <td th:text="${gaji.id}"></td>
                     <td th:text="${gaji.gajiPokok}"></td>
                     <td th:text="${gaji.totalPendapatan}"></td>
-                    <td><a th:href="@{/gaji/}" class="card bg-info text-light text-center m-auto">lihat</a></td>
-                    <td><a th:href="@{/gaji/ubah/}" class="card bg-dark text-light text-center m-auto pl-1 pr-1">ubah</a></td>
-                    <td><a th:href="@{/gaji/hapus/}" class="card bg-danger text-light text-center m-auto">hapus</a></td>
+                    <td><a th:href="@{/gaji/add}" class="card bg-info text-light text-center m-auto">lihat</a></td>
+                    <td><a th:href="@{/gaji/update/}+${gaji.id}" class="card bg-dark text-light text-center m-auto pl-1 pr-1">ubah</a></td>
+                    <td><a th:href="@{/gaji/delete/}+${gaji.id}" class="card bg-danger text-light text-center m-auto">hapus</a></td>
                 </tr>
                 <tr th:unless="${hasGaji}">
                     <div th:text="'Belum memiliki daftar gaji'" class="text-center font-weight-bold font-italic pb-2 text-danger"></div>

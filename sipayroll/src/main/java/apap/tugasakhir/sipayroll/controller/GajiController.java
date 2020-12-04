@@ -95,18 +95,13 @@ public class GajiController {
             Model model
     ){
         List<GajiModel> listGaji = gajiService.getGajiList();
-        Map<Integer, Integer> dict = new HashMap<Integer, Integer>();
         Integer gajiTambahan = 0;
         for (GajiModel gaji:listGaji) {
             gajiTambahan += lemburService.totalLemburinMonthByGaji(gaji);
             gajiTambahan += bonusService.totalBonusinMonthByGaji(gaji);
             gajiTambahan += gaji.getGajiPokok();
             gaji.setTotalPendapatan(gajiTambahan);
-//            dict.put(gaji.getId(), gajiTambahan);
             gajiTambahan = 0;
-            System.out.println(lemburService.totalLemburinMonthByGaji(gaji));
-            System.out.println(bonusService.totalBonusinMonthByGaji(gaji));
-            System.out.println(dict.get(gaji.getId()));
         }
         model.addAttribute("listGaji", listGaji);
         model.addAttribute("hasGaji", listGaji.size()>0);

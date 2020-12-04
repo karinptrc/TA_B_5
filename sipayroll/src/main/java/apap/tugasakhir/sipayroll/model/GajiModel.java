@@ -57,6 +57,8 @@ public class GajiModel {
     @JsonIgnore
     private List<BonusModel> listBonus;
 
+    private Integer totalPendapatan;
+
     public Integer getId() {
         return id;
     }
@@ -127,5 +129,13 @@ public class GajiModel {
 
     public void setListBonus(List<BonusModel> listBonus) {
         this.listBonus = listBonus;
+    }
+
+    public Integer getTotalPendapatan() {
+        return totalPendapatan;
+    }
+
+    public void setTotalPendapatan(Integer totalPendapatan) {
+        this.totalPendapatan = totalPendapatan;
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import javax.validation.constraints.Null;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +53,20 @@ public class BonusServiceImplementation implements BonusService{
         }
         bonusDb.save(bonus);
         return true;
+    }
+
+    @Override
+    public Integer totalBonusinMonthByGaji(GajiModel gaji) {
+        Integer currentMonth = LocalDate.now().getMonthValue();
+//        List<BonusModel> listBonus = bonusDb.getBonusModelsByGaji(gaji);
+        Integer total = 0;
+        for (BonusModel bonus:gaji.getListBonus()) {
+            System.out.println(bonus.getJenis());
+            if (bonus.getTanggal().getMonthValue() == currentMonth){
+                total += bonus.getJumlahBonus();
+            }
+        }
+        return total;
     }
 
     public boolean validateBonus(GajiModel gaji, Integer jenis){

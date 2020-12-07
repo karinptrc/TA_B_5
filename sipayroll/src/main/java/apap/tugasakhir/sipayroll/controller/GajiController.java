@@ -1,8 +1,9 @@
 package apap.tugasakhir.sipayroll.controller;
 import apap.tugasakhir.sipayroll.model.GajiModel;
 import apap.tugasakhir.sipayroll.model.UserModel;
-import apap.tugasakhir.sipayroll.repository.GajiDb;
+import apap.tugasakhir.sipayroll.service.BonusService;
 import apap.tugasakhir.sipayroll.service.GajiService;
+import apap.tugasakhir.sipayroll.service.LemburService;
 import apap.tugasakhir.sipayroll.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class GajiController {
@@ -26,8 +29,10 @@ public class GajiController {
     private GajiService gajiService;
 
     @Autowired
-    GajiDb gajiDb;
+    private LemburService lemburService;
 
+    @Autowired
+    private BonusService bonusService;
 
     @GetMapping("/gaji/add")
     public String addGajiFormPage(Model model){
@@ -85,4 +90,26 @@ public class GajiController {
         return "delete-gaji";
     }
 
+    @RequestMapping("/gaji")
+    public String listGaji(
+            Model model
+    ){
+        List<GajiModel> listGaji = gajiService.getGajiList();
+        Map<Integer, Integer> dict = new HashMap<Integer, Integer>();
+        Integer gajiTambahan = 0;
+        for (GajiModel gaji:listGaji) {
+            gajiTambahan += lemburService.totalLemburinMonthByGaji(gaji);
+            gajiTambahan += bonusService.totalBonusinMonthByGaji(gaji);
+            gajiTambahan += gaji.getGajiPokok();
+            gaji.setTotalPendapatan(gajiTambahan);
+//            dict.put(gaji.getId(), gajiTambahan);
+            gajiTambahan = 0;
+            System.out.println(lemburService.totalLemburinMonthByGaji(gaji));
+            System.out.println(bonusService.totalBonusinMonthByGaji(gaji));
+            System.out.println(dict.get(gaji.getId()));
+        }
+        model.addAttribute("listGaji", listGaji);
+        model.addAttribute("hasGaji", listGaji.size()>0);
+        return "daftar-gaji";
+    }
 }

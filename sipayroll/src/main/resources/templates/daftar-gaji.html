@@ -6,6 +6,7 @@
 
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
@@ -13,6 +14,22 @@
     <a th:href="@{/gaji/add}" class="btn btn-outline-primary bg-dark text-light mb-1"> + Tambah Gaji </a>
     <div class="shadow m-auto bg-white rounded text-center">
         <h3 class="card-header bg-dark text-light">Daftar Gaji</h3>
+
+        <div th:if="${changedStatus}" th:object="${gajiUpdated}">
+            <div th:if="${statusGaji}" class="alert alert-success alert-dismissible fade show"
+                 th:text="'Gaji milik '+ *{id} + ' telah disetujui'" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div th:unless="${statusGaji}" class="alert alert-warning alert-dismissible fade show"
+                 th:text="'Gaji milik '+ *{id} + ' telah ditolak'" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+
         <div class="card-body">
             <table class="table table-responsive-lg text-center">
                 <thead>
@@ -22,8 +39,7 @@
                     <th>Gaji Pokok</th>
                     <th>Total Pendapatan</th>
                     <th>Action</th>
-                    <th></th>
-                    <th></th>
+                    <th>Update Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,9 +48,19 @@
                     <td th:text="${gaji.id}"></td>
                     <td th:text="${gaji.gajiPokok}"></td>
                     <td th:text="${gaji.totalPendapatan}"></td>
-                    <td><a th:href="@{/gaji/add}" class="card bg-info text-light text-center m-auto">lihat</a></td>
-                    <td><a th:href="@{/gaji/update/}+${gaji.id}" class="card bg-dark text-light text-center m-auto pl-1 pr-1">ubah</a></td>
-                    <td><a th:href="@{/gaji/delete/}+${gaji.id}" class="card bg-danger text-light text-center m-auto">hapus</a></td>
+                    <td>
+                        <div class="row">
+                            <a th:href="@{/gaji/add}" class="card bg-info text-light text-center m-auto">lihat</a>
+                            <a th:href="@{/gaji/update/}+${gaji.id}" class="card bg-dark text-light text-center m-auto pl-1 pr-1">ubah</a>
+                            <a th:href="@{/gaji/delete/}+${gaji.id}" class="card bg-danger text-light text-center m-auto">hapus</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <a th:href="@{/gaji/setujui/}+${gaji.id}" class="card bg-dark text-light text-center m-auto pl-1 pr-1">setujui</a>
+                            <a th:href="@{/gaji/tolak/}+${gaji.id}" class="card bg-dark text-light text-center m-auto pl-1 pr-1">tolak</a>
+                        </div>
+                    </td>
                 </tr>
                 <tr th:unless="${hasGaji}">
                     <div th:text="'Belum memiliki daftar gaji'" class="text-center font-weight-bold font-italic pb-2 text-danger"></div>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Gaji</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container p-5 m-auto position-relative min-vh-100">
+    <a th:href="@{/pilot/tambah}" class="btn btn-outline-primary bg-dark text-light mb-1"> + Tambah Pilot </a>
+    <div class="shadow m-auto bg-white rounded text-center">
+        <h3 class="card-header bg-dark text-light">Daftar Gaji</h3>
+        <div class="card-body">
+            <table class="table table-responsive-lg text-center">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Pegawai</th>
+                    <th>Gaji Pokok</th>
+                    <th>Total Pendapatan</th>
+<!--                    <th>Tanggal Lahir</th>-->
+<!--                    <th>Jenis Kelamin</th>-->
+                    <th>Action</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${hasGaji}" th:each="gaji, iterationStatus : ${listGaji}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${gaji.id}"></td>
+                    <td th:text="${gaji.gajiPokok}"></td>
+                    <td th:text="${gaji.totalPendapatan}"></td>
+                    <td><a th:href="@{/gaji/}" class="card bg-info text-light text-center m-auto">lihat</a></td>
+                    <td><a th:href="@{/gaji/ubah/}" class="card bg-dark text-light text-center m-auto pl-1 pr-1">ubah</a></td>
+                    <td><a th:href="@{/gaji/hapus/}" class="card bg-danger text-light text-center m-auto">hapus</a></td>
+                </tr>
+                <tr th:unless="${hasGaji}">
+                    <div th:text="'Belum memiliki daftar gaji'" class="text-center font-weight-bold font-italic pb-2 text-danger"></div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package apap.tugasakhir.sipayroll.controller;
 
+import apap.tugasakhir.sipayroll.service.LemburService;
 import apap.tugasakhir.sipayroll.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

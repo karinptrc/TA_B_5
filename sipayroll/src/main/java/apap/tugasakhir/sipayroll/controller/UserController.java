@@ -1,21 +1,21 @@
 package apap.tugasakhir.sipayroll.controller;
 
+import apap.tugasakhir.sipayroll.model.RoleModel;
 import apap.tugasakhir.sipayroll.model.UserModel;
+import apap.tugasakhir.sipayroll.rest.BaseResponse;
+import apap.tugasakhir.sipayroll.rest.PegawaiDTO;
+import apap.tugasakhir.sipayroll.service.PegawaiRestAPIService;
 import apap.tugasakhir.sipayroll.service.RoleService;
 import apap.tugasakhir.sipayroll.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/user")
@@ -24,26 +24,38 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private PegawaiRestAPIService pegawaiRestAPIService;
 
     @RequestMapping("/add")
     public String addUserPage(Model model){
+        model.addAttribute("pegawai", new PegawaiDTO());
         model.addAttribute("listRole", roleService.findAll());
+        model.addAttribute("dateTime", LocalDateTime.now());
         return "add-user";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addUserSubmit(@ModelAttribute UserModel user, RedirectAttributes redir){
-        if(userService.checkIfUsernameIsUsed(user.getUsername())){
+    public String addUserSubmit(@ModelAttribute PegawaiDTO pegawai,
+                                @RequestParam("password") String password,
+                                RedirectAttributes redir){
+        if(userService.checkIfUsernameIsUsed(pegawai.getUsername())){
             redir.addFlashAttribute("hasMessage", true);
-            redir.addFlashAttribute("message", "username " + user.getUsername() + " sudah digunakan. silahkan ubah kembali username Anda.");
+            redir.addFlashAttribute("message", "username " + pegawai.getUsername() + " sudah digunakan. silahkan ubah kembali username Anda.");
             return "redirect:/user/add";
         }
-        if(!userService.checkIfValidNewPassword(user.getPassword())){
+        if(!userService.checkIfValidNewPassword(password)){
             redir.addFlashAttribute("hasMessage", true);
             redir.addFlashAttribute("message", "password invalid. password harus terdiri dari minimal 8 karakter, serta mengandung huruf dan angka.");
             return "redirect:/user/add";
         }
+        UserModel user = new UserModel();
+        RoleModel role = roleService.findRoleById(pegawai.getRoleId());
+        user.setUsername(pegawai.getUsername());
+        user.setPassword(password);
+        user.setRole(role);
         userService.addUser(user);
+        pegawaiRestAPIService.addPegawai(pegawai);
         redir.addFlashAttribute("hasMessage", true);
         redir.addFlashAttribute("message", "user " + user.getUsername() + " berhasil ditambahkan");
         return "redirect:/user/add";
@@ -89,5 +101,21 @@ public class UserController {
         redir.addFlashAttribute("hasMessage", true);
         redir.addFlashAttribute("message", "password berhasil diganti");
         return "redirect:/user/updatePassword";
+    }
+
+    @RequestMapping(value = "/profil")
+    private String profil(Model model) throws WebClientException{
+        UserModel user = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        RoleModel role = roleService.findRoleById(user.getRole().getId());
+        try{
+            BaseResponse baseResponse = pegawaiRestAPIService.getPegawai(user.getUsername());
+            PegawaiDTO pegawai = baseResponse.getResult();
+            model.addAttribute("isPegawai", true);
+            model.addAttribute("pegawai", pegawai);
+        }catch (WebClientException webClientException){ }
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("role", role.getRole());
+        model.addAttribute("dateTime", LocalDateTime.now());
+        return "profil-user";
     }
 }

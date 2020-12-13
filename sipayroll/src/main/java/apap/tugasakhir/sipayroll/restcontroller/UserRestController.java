@@ -1,4 +1,4 @@
-package apap.tugasakhir.sipayroll.controller;
+package apap.tugasakhir.sipayroll.restcontroller;
 
 import apap.tugasakhir.sipayroll.model.UserModel;
 import apap.tugasakhir.sipayroll.service.UserRestService;

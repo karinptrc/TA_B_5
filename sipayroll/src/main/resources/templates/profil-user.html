@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar (pagetitle='Profil')"></nav>
+    <div class="container pm p-5 text-center position-relative min-vh-100">
+        <div class="m-auto w-75 pl-4 pr-4">
+            <div class="pl-5 pr-5 m-auto">
+                <div class="shadow m-auto bg-white rounded w-75">
+                    <h5 class="card-header bg-dark m-auto text-light p-0">Profil</h5>
+                    <div class="card-body m-auto pl-2 pr-2">
+                        <div class="text-left m-auto p-1">
+                            <div class="row">
+                                <div th:text="'Username'" class="col"></div>
+                                <div th:text="': ' + ${username}" class="col"></div>
+                            </div>
+                            <div class="row" th:if="${isPegawai}">
+                                <div th:text="'Nama'" class="col"></div>
+                                <div th:text="': ' + ${pegawai.nama}" class="col"></div>
+                            </div>
+                            <div class="row" th:if="${isPegawai}">
+                                <div th:text="'Nomor Telepon'" class="col"></div>
+                                <div th:text="': ' + ${pegawai.noTelepon}" class="col"></div>
+                            </div>
+                            <div class="row" th:if="${isPegawai}">
+                                <div th:text="'Tempat Lahir'" class="col"></div>
+                                <div th:text="': ' + ${pegawai.tempatLahir}" class="col"></div>
+                            </div>
+                            <div class="row" th:if="${isPegawai}">
+                                <div th:text="'Tanggal Lahir'" class="col"></div>
+                                <div th:text="': ' + ${#dates.format(pegawai.tanggalLahir, 'dd/MM/yyyy HH:mm')}" class="col"></div>
+                            </div>
+                            <div class="row" th:if="${isPegawai}">
+                                <div th:text="'Alamat'" class="col"></div>
+                                <div th:text="': ' + ${pegawai.alamat}" class="col"></div>
+                            </div>
+                            <div class="row">
+                                <div th:text="'Role'" class="col"></div>
+                                <div th:text="': ' + ${role}" class="col"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br><br>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>

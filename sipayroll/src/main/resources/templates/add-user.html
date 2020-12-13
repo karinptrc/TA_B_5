@@ -12,10 +12,30 @@
         <div class="shadow m-auto bg-white rounded w-50 card">
             <div class="card-header bg-dark text-light p-0">Tambah Pengguna Baru</div>
             <div class="card-body text-left">
-                <form th:action="@{/user/add}" method="POST">
+                <form th:action="@{/user/add}" th:object="${pegawai}" method="POST">
                     <div class="row form-group">
                         <label class="col-sm-4">Username:</label>
                         <input type="text" class="col-sm-8 form-control input-sm" name="username">
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-sm-4">Nama:</label>
+                        <input type="text" class="col-sm-8 form-control input-sm" name="nama">
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-sm-4">Nomor Telepon:</label>
+                        <input type="text" class="col-sm-8 form-control input-sm" name="noTelepon">
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-sm-4">Tempat Lahir:</label>
+                        <input type="text" class="col-sm-8 form-control input-sm" name="tempatLahir">
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-sm-4">Tanggal Lahir:</label>
+                        <input type="datetime-local" class="col-sm-8 form-control input-sm" name="tanggalLahir">
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-sm-4">Alamat:</label>
+                        <input type="text" class="col-sm-8 form-control input-sm" name="alamat">
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Password:</label>
@@ -23,7 +43,7 @@
                     </div>
                     <div class="row form-group">
                         <label  class="col-sm-4">Role:</label>
-                        <select name="role" class="col-sm-8 form-control">
+                        <select name="roleId" class="col-sm-8 form-control">
                             <option selected value =""> -- Pilih Role -- </option>
                             <option th:each="role : ${listRole}" th:value="${role.id}" th:text="${role.role}"></option>
                         </select>

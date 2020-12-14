@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title> Halaman Utama </title>
+    <!--bootstrap.css-->
+    <head th:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
 
     <!--jquery, ajax, and bootstrap.js-->
     <head th:fragment="js">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </head>
-
-    <!--bootstrap.css-->
-    <head th:fragment="css">
-        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
 </head>
 <body>
@@ -27,9 +26,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a type="submit" class="nav-link text-light" th:href="@{/}"> Halaman Utama </a></li>
-                <li class="nav-item dropdown"><a type="submit" class="nav-link text-light"> Pengguna </a>
+                <li class="nav-item dropdown"><a type="submit" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pengguna </a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" > Profil </a></li>
+                        <li class="dropdown-item" sec:authorize="hasAuthority('Kepala Departemen HR')"><a type="submit" class="nav-link text-dark" th:href="@{/user/profil}"> Profil </a></li>
                         <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/user/updatePassword}"> Ubah Password </a></li>
                         <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/user/add}"> Tambah Pengguna </a></li>
                     </ul>
@@ -40,7 +39,7 @@
                         <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/gaji/add}"> Tambah Gaji </a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown"><a type="submit" class="nav-link text-light"> Lembur </a>
+                <li class="nav-item dropdown"><a type="submit" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Lembur </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item"><a type="submit" class="nav-link text-dark" > Daftar Lembur </a></li>
                         <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/lembur/add}"> Tambah Lembur </a></li>

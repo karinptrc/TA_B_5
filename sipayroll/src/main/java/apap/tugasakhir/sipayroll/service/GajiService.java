@@ -13,4 +13,6 @@ public interface GajiService {
     void deleteGaji(GajiModel gaji);
 
     List<GajiModel> getGajiList();
+
+    GajiModel updateStatusGaji(Integer idGaji, Integer status);
 }

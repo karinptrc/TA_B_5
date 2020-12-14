@@ -61,7 +61,7 @@ public class GajiController {
         redir.addFlashAttribute("berhasil",berhasil);
         return "redirect:/gaji/add";
     }
-    @GetMapping("/gaji/update/{id}")
+    @GetMapping(value = "/gaji/update/{id}", params = {"update"})
     public String updateGajiFormPage(@PathVariable Integer id, Model model) {
         GajiModel gaji = gajiService.getGajiById(id);
         List<UserModel> listUser = userService.getUserList();
@@ -95,21 +95,44 @@ public class GajiController {
             Model model
     ){
         List<GajiModel> listGaji = gajiService.getGajiList();
-        Map<Integer, Integer> dict = new HashMap<Integer, Integer>();
         Integer gajiTambahan = 0;
         for (GajiModel gaji:listGaji) {
             gajiTambahan += lemburService.totalLemburinMonthByGaji(gaji);
             gajiTambahan += bonusService.totalBonusinMonthByGaji(gaji);
             gajiTambahan += gaji.getGajiPokok();
             gaji.setTotalPendapatan(gajiTambahan);
-//            dict.put(gaji.getId(), gajiTambahan);
             gajiTambahan = 0;
-            System.out.println(lemburService.totalLemburinMonthByGaji(gaji));
-            System.out.println(bonusService.totalBonusinMonthByGaji(gaji));
-            System.out.println(dict.get(gaji.getId()));
         }
         model.addAttribute("listGaji", listGaji);
         model.addAttribute("hasGaji", listGaji.size()>0);
         return "daftar-gaji";
+    }
+
+    @RequestMapping(value = "/gaji/setujui/{id}")
+    public String setujuiGaji(
+            @PathVariable(value = "id") Integer id,
+            RedirectAttributes redir
+    ){
+        List<GajiModel> listGaji = gajiService.getGajiList();
+        GajiModel gaji = gajiService.updateStatusGaji(id, 2);
+        redir.addFlashAttribute("gajiUpdated", gaji);
+        redir.addFlashAttribute("changedStatus", true);
+        redir.addFlashAttribute("statusGaji", true); // if gaji disetujui
+        redir.addFlashAttribute("listGaji", listGaji);
+        return "redirect:/gaji";
+    }
+
+    @RequestMapping(value = "/gaji/tolak/{id}")
+    public String tolakGaji(
+            @PathVariable(value = "id") Integer id,
+            RedirectAttributes redir
+    ){
+        List<GajiModel> listGaji = gajiService.getGajiList();
+        GajiModel gaji = gajiService.updateStatusGaji(1, 1);
+        redir.addFlashAttribute("gajiUpdated", gaji);
+        redir.addFlashAttribute("changedStatus", true);
+        redir.addFlashAttribute("statusGaji", false); // if gaji ditolak
+        redir.addFlashAttribute("listGaji", listGaji);
+        return "redirect:/gaji";
     }
 }

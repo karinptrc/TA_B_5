@@ -62,7 +62,20 @@ public class GajiServiceImpl implements GajiService{
         return gajiDb.findAll();
     }
 
-//    @Override
+    @Override
+    public GajiModel updateStatusGaji(Integer idGaji, Integer status) {
+        GajiModel gaji = gajiDb.findById(idGaji).get();
+        if (status == 1){
+            //jika gaji ditolak
+            gaji.setStatusPersetujuan(1);
+        } else {
+            //jika gaji disetujui
+            gaji.setStatusPersetujuan(2);
+        }
+        return gajiDb.save(gaji);
+    }
+
+    //    @Override
 //    public boolean checkListIdUser(String id){
 //        List<GajiModel> listIdUser =gajiDb.findAllByUserId(id);
 //        listIdUser.con

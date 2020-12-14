@@ -94,6 +94,14 @@ public class GajiController {
     public String listGaji(
             Model model
     ){
+        UserModel user = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        if(user.getRole().getId()==6){
+            GajiModel gaji = user.getGaji();
+            model.addAttribute("gaji", gaji);
+            model.addAttribute("karyawan", true);
+            model.addAttribute("hasGaji",  gaji != null);
+            return "daftar-gaji";
+        }
         List<GajiModel> listGaji = gajiService.getGajiList();
         Integer gajiTambahan = 0;
         for (GajiModel gaji:listGaji) {
@@ -104,7 +112,8 @@ public class GajiController {
             gajiTambahan = 0;
         }
         model.addAttribute("listGaji", listGaji);
-        model.addAttribute("hasGaji", listGaji.size()>0);
+        model.addAttribute("karyawan", false);
+        model.addAttribute("hasGaji",  listGaji.size()>0);
         return "daftar-gaji";
     }
 
@@ -114,7 +123,8 @@ public class GajiController {
             RedirectAttributes redir
     ){
         List<GajiModel> listGaji = gajiService.getGajiList();
-        GajiModel gaji = gajiService.updateStatusGaji(id, 2);
+        UserModel penyetuju = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        GajiModel gaji = gajiService.setujuiGaji(gajiService.getGajiById(id), penyetuju);
         redir.addFlashAttribute("gajiUpdated", gaji);
         redir.addFlashAttribute("changedStatus", true);
         redir.addFlashAttribute("statusGaji", true); // if gaji disetujui
@@ -128,7 +138,9 @@ public class GajiController {
             RedirectAttributes redir
     ){
         List<GajiModel> listGaji = gajiService.getGajiList();
-        GajiModel gaji = gajiService.updateStatusGaji(1, 1);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserModel penyetuju = userService.findUserByUsername(username);
+        GajiModel gaji = gajiService.tolakGaji(gajiService.getGajiById(id), penyetuju);
         redir.addFlashAttribute("gajiUpdated", gaji);
         redir.addFlashAttribute("changedStatus", true);
         redir.addFlashAttribute("statusGaji", false); // if gaji ditolak

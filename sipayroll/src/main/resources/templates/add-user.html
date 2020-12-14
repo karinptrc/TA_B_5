@@ -15,31 +15,31 @@
                 <form th:action="@{/user/add}" th:object="${pegawai}" method="POST">
                     <div class="row form-group">
                         <label class="col-sm-4">Username:</label>
-                        <input type="text" class="col-sm-8 form-control input-sm" name="username">
+                        <input type="text" class="col-sm-8 form-control input-sm" name="username" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Nama:</label>
-                        <input type="text" class="col-sm-8 form-control input-sm" name="nama">
+                        <input type="text" class="col-sm-8 form-control input-sm" name="nama" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Nomor Telepon:</label>
-                        <input type="text" class="col-sm-8 form-control input-sm" name="noTelepon">
+                        <input type="text" class="col-sm-8 form-control input-sm" name="noTelepon" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Tempat Lahir:</label>
-                        <input type="text" class="col-sm-8 form-control input-sm" name="tempatLahir">
+                        <input type="text" class="col-sm-8 form-control input-sm" name="tempatLahir" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Tanggal Lahir:</label>
-                        <input type="datetime-local" class="col-sm-8 form-control input-sm" name="tanggalLahir">
+                        <input type="datetime-local" class="col-sm-8 form-control input-sm" name="tanggalLahir" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Alamat:</label>
-                        <input type="text" class="col-sm-8 form-control input-sm" name="alamat">
+                        <input type="text" class="col-sm-8 form-control input-sm" name="alamat" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Password:</label>
-                        <input type="password" class="col-sm-8 form-control input-sm" name="password">
+                        <input type="password" class="col-sm-8 form-control input-sm" name="password" required>
                     </div>
                     <div class="row form-group">
                         <label  class="col-sm-4">Role:</label>
@@ -53,7 +53,7 @@
                     </div>
                 </form>
                 <div th:if="${hasMessage}">
-                    <h4 th:text="${message}" class="text-danger" </h4>
+                    <h5 th:text="${message}" class="text-danger" </h4>
                 </div>
             </div>
         </div>

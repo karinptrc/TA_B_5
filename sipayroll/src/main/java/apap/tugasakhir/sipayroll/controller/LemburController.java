@@ -102,13 +102,13 @@ public class LemburController {
             List<LemburModel> listLembur = lemburService.getListLemburByGaji(user.getGaji());
             model.addAttribute("listLembur", listLembur);
             model.addAttribute("karyawan", true);
-            model.addAttribute("hasGaji",  listLembur.size()>0);
+            model.addAttribute("hasLembur",  listLembur.size()>0);
             return "daftar-lembur";
         }
         List<LemburModel> listLembur = lemburService.getListLembur();
         model.addAttribute("listLembur", listLembur);
         model.addAttribute("karyawan", false);
-        model.addAttribute("hasGaji",  listLembur.size()>0);
+        model.addAttribute("hasLembur",  listLembur.size()>0);
         return "daftar-lembur";
     }
 }

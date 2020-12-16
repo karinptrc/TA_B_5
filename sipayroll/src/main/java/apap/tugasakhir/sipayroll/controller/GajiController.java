@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +62,7 @@ public class GajiController {
         redir.addFlashAttribute("berhasil",berhasil);
         return "redirect:/gaji/add";
     }
-    @GetMapping(value = "/gaji/update/{id}", params = {"update"})
+    @GetMapping(value = "/gaji/update/{id}")
     public String updateGajiFormPage(@PathVariable Integer id, Model model) {
         GajiModel gaji = gajiService.getGajiById(id);
         List<UserModel> listUser = userService.getUserList();
@@ -95,15 +96,20 @@ public class GajiController {
             Model model
     ){
         UserModel user = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        //if user's role is Karyawan
         if(user.getRole().getId()==6){
             GajiModel gaji = user.getGaji();
             model.addAttribute("gaji", gaji);
             model.addAttribute("karyawan", true);
             model.addAttribute("hasGaji",  gaji != null);
+            model.addAttribute("month", LocalDate.now().getMonth());
             return "daftar-gaji";
         }
+
+        //if user's role is Kepala Departemen HR or Staff Payroll
         List<GajiModel> listGaji = gajiService.getGajiList();
         Integer gajiTambahan = 0;
+        //calculate total pendapatan
         for (GajiModel gaji:listGaji) {
             gajiTambahan += lemburService.totalLemburinMonthByGaji(gaji);
             gajiTambahan += bonusService.totalBonusinMonthByGaji(gaji);
@@ -114,6 +120,7 @@ public class GajiController {
         model.addAttribute("listGaji", listGaji);
         model.addAttribute("karyawan", false);
         model.addAttribute("hasGaji",  listGaji.size()>0);
+        model.addAttribute("month", LocalDate.now().getMonth());
         return "daftar-gaji";
     }
 

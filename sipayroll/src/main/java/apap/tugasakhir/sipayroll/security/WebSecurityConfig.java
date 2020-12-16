@@ -22,10 +22,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/user/add").hasAuthority("Kepala Departemen HR")
-                //tambah lembur hanya karyawan
                 .antMatchers("/lembur/add").hasAnyAuthority("Karyawan")
                 .antMatchers("/lembur/ubah").hasAnyAuthority("Karyawan", "Kepala Departemen HR", "Staff Payroll")
                 .antMatchers("/bonus/add").hasAuthority("Staff Payroll")
+                // .antMatchers("/lowongan/add").hasAuthority("Staff Payroll")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -11,14 +11,14 @@ public class LowonganDTO {
     @JsonProperty("posisi")
     private String posisi;
 
-    @JsonProperty("jenis_lowongan")
-    private Integer jenis_lowongan;
+    @JsonProperty("jenisLowongan")
+    private Long jenisLowongan;
 
-    @JsonProperty("jumlah_karyawan")
+    @JsonProperty("jumlahKaryawan")
     private Integer jumlahKaryawan;
 
-    @JsonProperty("uuid")
-    private String uuid;
+    // @JsonProperty("uuid")
+    // private String uuid;
 
     public String getDivisi() {
         return divisi;
@@ -36,12 +36,12 @@ public class LowonganDTO {
         this.posisi = posisi;
     }
 
-    public Integer getJenis_lowongan() {
-        return jenis_lowongan;
+    public Long getJenisLowongan() {
+        return jenisLowongan;
     }
 
-    public void setJenis_lowongan(Integer jenis_lowongan) {
-        this.jenis_lowongan = jenis_lowongan;
+    public void setJenisLowongan(Long jenisLowongan) {
+        this.jenisLowongan = jenisLowongan;
     }
 
     public Integer getJumlahKaryawan() {
@@ -50,13 +50,5 @@ public class LowonganDTO {
 
     public void setJumlahKaryawan(Integer jumlahKaryawan) {
         this.jumlahKaryawan = jumlahKaryawan;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 }

@@ -20,7 +20,7 @@ public class LowonganRestServiceImpl implements LowonganRestService {
     }
 
     @Override
-    public  Mono<String> requestLowongan(LowonganDTO lowongan){
+    public Mono<String> requestLowongan(LowonganDTO lowongan){
         System.out.println("berhasil kirim");
         return this.webClient
                     .post()

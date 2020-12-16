@@ -31,6 +31,31 @@ public class LemburController {
         return "form-add-lembur";
     }
 
+//    @PostMapping("/lembur/add")
+//    public String addLemburSubmit(@ModelAttribute LemburModel lembur, RedirectAttributes redir){
+//        UserModel user = userService.findUserByUsername(
+//                SecurityContextHolder.getContext().getAuthentication().getName());
+//        GajiModel gaji = user.getGaji();
+//        if(lemburService.bandingTanggal(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == true && lemburService.bandingJam(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == true){
+//            lembur.setStatusPersetujuan(0);
+//            lembur.setGaji(gaji);
+//            lembur.setKompensasiPerJam(120000);
+//            lemburService.addLembur(lembur);
+//            redir.addFlashAttribute("lembur", lembur);
+//            redir.addFlashAttribute("berhasil", "Penambahan lembur berhasil!");
+//            return "redirect:/lembur/add";
+//        } else if(lemburService.bandingTanggal(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == false){
+//            redir.addFlashAttribute("gagal", "Tanggal yang diberikan berbeda!");
+//            return "redirect:/lembur/add";
+//        } else if(lemburService.bandingJam(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == false){
+//            redir.addFlashAttribute("gagal", "Waktu mulai dan selesai tidak sesuai!");
+//            return "redirect:/lembur/add";
+//        } else{
+//            redir.addFlashAttribute("gagal", "ID Gaji belum terdaftar! Penambahan lembur gagal!");
+//            return "redirect:/lembur/add";
+//        }
+//    }
+
     @PostMapping("/lembur/add")
     public String addLemburSubmit(@ModelAttribute LemburModel lembur, RedirectAttributes redir){
         UserModel user = userService.findUserByUsername(

@@ -89,4 +89,29 @@ public class LemburController {
         redir.addFlashAttribute("berhasil", "Lembur berhasil diubah!");
         return "redirect:/lembur/ubah/"+lembur.getId();
     }
+
+    @GetMapping("/lembur/hapus/{id}")
+    public String hapusLemburFormPage(@PathVariable Integer id, RedirectAttributes redir){
+        LemburModel lembur = lemburService.getLemburById(id);
+        lemburService.deleteLembur(lembur);
+        redir.addFlashAttribute("berhasil", "Lembur berhasil dihapus");
+        return "redirect:/lembur/view";
+    }
+
+    @GetMapping("lembur/view")
+    public String viewLembur(Model model){
+        UserModel user = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (user.getRole().getId() == 6){
+            List<LemburModel> listLembur = lemburService.getListLemburByGaji(user.getGaji());
+            model.addAttribute("listLembur", listLembur);
+            model.addAttribute("karyawan", true);
+            model.addAttribute("hasLembur",  listLembur.size()>0);
+            return "daftar-lembur";
+        }
+        List<LemburModel> listLembur = lemburService.getListLembur();
+        model.addAttribute("listLembur", listLembur);
+        model.addAttribute("karyawan", false);
+        model.addAttribute("hasLembur",  listLembur.size()>0);
+        return "daftar-lembur";
+    }
 }

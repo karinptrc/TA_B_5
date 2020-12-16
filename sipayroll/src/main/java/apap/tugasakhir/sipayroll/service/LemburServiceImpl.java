@@ -102,4 +102,19 @@ public class LemburServiceImpl implements LemburService {
         }
         return jamValid;
     }
+
+    @Override
+    public void deleteLembur(LemburModel lembur) {
+        lemburDb.delete(lembur);
+    }
+
+    @Override
+    public List<LemburModel> getListLembur() {
+        return lemburDb.findAll();
+    }
+
+    @Override
+    public List<LemburModel> getListLemburByGaji(GajiModel gaji) {
+        return lemburDb.getLemburModelsByGaji(gaji);
+    }
 }

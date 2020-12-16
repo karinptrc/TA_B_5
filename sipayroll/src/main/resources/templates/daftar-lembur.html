@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Gaji</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container p-5 m-auto position-relative min-vh-100">
+    <div class="shadow m-auto bg-white rounded text-center">
+        <h3 class="card-header bg-dark text-light">Daftar Lembur</h3>
+
+        <div class="card-body">
+            <table class="table table-responsive-lg text-center">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Pegawai</th>
+                    <th>Waktu Mulai</th>
+                    <th>Waktu Selesai</th>
+                    <th>Kompensasi</th>
+                    <th>Status Persetujuan</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${hasLembur && karyawan}" th:each="lembur, iterationStatus : ${listLembur}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${lembur.gaji.user.username}"></td>
+                    <td th:text="${lembur.waktuMulai}"></td>
+                    <td th:text="${lembur.waktuSelesai}"></td>
+                    <td th:text="${lembur.kompensasiPerJam}"></td>
+                    <td th:text="${lembur.statusPersetujuan}"></td>
+                    <td>
+                        <div class="row">
+                            <a th:href="@{/lembur/ubah/}+${lembur.id}"
+                               class="btn btn-warning text-light text-center m-auto pl-1 pr-1"
+                               sec:authorize="hasAnyAuthority('Kepala Departemen HR','Staff Payroll')">ubah</a>
+                            <a th:href="@{/lembur/hapus/}+${lembur.id}"
+                               class="btn btn-danger text-light text-center m-auto"
+                               sec:authorize="hasAnyAuthority('Kepala Departemen HR','Staff Payroll')">hapus</a>
+                        </div>
+                    </td>
+                <tr th:unless="${hasLembur && karyawan}" th:each="lembur, iterationStatus : ${listLembur}">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${lembur.gaji.user.username}"></td>
+                    <td th:text="${lembur.waktuMulai}"></td>
+                    <td th:text="${lembur.waktuSelesai}"></td>
+                    <td th:text="${lembur.kompensasiPerJam}"></td>
+                    <td th:text="${lembur.statusPersetujuan}"></td>
+                    <td>
+                        <div class="row">
+                            <a th:href="@{/lembur/ubah/}+${lembur.id}"
+                               class="btn btn-warning text-light text-center m-auto pl-1 pr-1"
+                               sec:authorize="hasAnyAuthority('Kepala Departemen HR','Staff Payroll')">ubah</a>
+                            <a th:href="@{/lembur/hapus/}+${lembur.id}"
+                               class="btn btn-danger text-light text-center m-auto"
+                               sec:authorize="hasAnyAuthority('Kepala Departemen HR','Staff Payroll')">hapus</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr th:unless="${hasLembur}">
+                    <div th:text="'Belum memiliki daftar lembur'" class="text-center font-weight-bold font-italic pb-2 text-danger"></div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>

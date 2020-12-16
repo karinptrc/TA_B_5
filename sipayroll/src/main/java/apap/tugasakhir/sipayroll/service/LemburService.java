@@ -13,4 +13,7 @@ public interface LemburService {
     Boolean bandingTanggal(Date mulai, Date selesai);
     Boolean bandingJam(Date mulai, Date selesai);
     Integer totalLemburinMonthByGaji(GajiModel gaji);
+    void deleteLembur(LemburModel lembur);
+    List<LemburModel> getListLembur();
+    List<LemburModel> getListLemburByGaji(GajiModel gaji);
 }

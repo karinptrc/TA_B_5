@@ -11,6 +11,7 @@ public interface LemburService {
     LemburModel getLemburById(Integer id);
     LemburModel updateLembur(LemburModel lembur);
     Boolean bandingTanggal(Date mulai, Date selesai);
+    Boolean bandingJam(Date mulai, Date selesai);
     Integer totalLemburinMonthByGaji(GajiModel gaji);
     void deleteLembur(LemburModel lembur);
     List<LemburModel> getListLembur();

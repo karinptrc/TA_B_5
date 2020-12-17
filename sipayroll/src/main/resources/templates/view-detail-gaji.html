@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Gaji</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar (pagetitle='Detail Gaji')"></nav>
+<br>
+
+<div class="row justify-content-center " >
+
+    <div class="card m-5 p-3 bg-light text-dark" style="width: 30rem;">
+        <br>
+        <h2 class="text-center">Detail Gaji</h2>
+        <br>
+
+        <table class="table">
+            <tr>
+                <th>UUID User</th>
+                <td th:text="${gaji.user.id}"></td>
+            </tr>
+            <tr>
+                <th>Nama Pegawai</th>
+                <td th:text="${gaji.user.username}"></td>
+            </tr>
+            <tr>
+                <th>Gaji</th>
+                <td th:text="${gaji.gajiPokok}"></td>
+            </tr>
+            <tr>
+                <th>Total Bonus</th>
+                <td th:text="${totalBonus}"></td>
+            </tr>
+<!--            <tr th:each="bonus, iterationStatus : ${bonus}">-->
+<!--                <th>Total Bonus</th>-->
+<!--                <td th:text="${bonus.jumlahBonus}"></td>-->
+<!--            </tr>-->
+            <tr>
+                <th>Total Lembur</th>
+                <td th:text="${totalLembur}"></td>
+            </tr>
+            <tr>
+                <th>Nama Penyetuju</th>
+                <td th:text="${penyetuju}"></td>
+            </tr>
+            <tr>
+                <th>Nama Pengaju</th>
+                <td th:text="${pengaju}"></td>
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td th:if="${hasPelatihan}"> - </td>
+                <td th:unless="${hasPelatihan}"> Harap mengikuti pelatihan atau gaji anda akan dipotong 10%! </td>
+                <!--                <td th:text="${}"></td>-->
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

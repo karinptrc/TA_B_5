@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface GajiDb extends JpaRepository<GajiModel, Long> {
     Optional<GajiModel> findById(Integer id);
+
+    Optional<GajiModel> findByUserUsername(String username);
 }

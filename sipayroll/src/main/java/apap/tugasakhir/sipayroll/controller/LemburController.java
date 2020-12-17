@@ -31,12 +31,37 @@ public class LemburController {
         return "form-add-lembur";
     }
 
+//    @PostMapping("/lembur/add")
+//    public String addLemburSubmit(@ModelAttribute LemburModel lembur, RedirectAttributes redir){
+//        UserModel user = userService.findUserByUsername(
+//                SecurityContextHolder.getContext().getAuthentication().getName());
+//        GajiModel gaji = user.getGaji();
+//        if(lemburService.bandingTanggal(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == true && lemburService.bandingJam(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == true){
+//            lembur.setStatusPersetujuan(0);
+//            lembur.setGaji(gaji);
+//            lembur.setKompensasiPerJam(120000);
+//            lemburService.addLembur(lembur);
+//            redir.addFlashAttribute("lembur", lembur);
+//            redir.addFlashAttribute("berhasil", "Penambahan lembur berhasil!");
+//            return "redirect:/lembur/add";
+//        } else if(lemburService.bandingTanggal(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == false){
+//            redir.addFlashAttribute("gagal", "Tanggal yang diberikan berbeda!");
+//            return "redirect:/lembur/add";
+//        } else if(lemburService.bandingJam(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == false){
+//            redir.addFlashAttribute("gagal", "Waktu mulai dan selesai tidak sesuai!");
+//            return "redirect:/lembur/add";
+//        } else{
+//            redir.addFlashAttribute("gagal", "ID Gaji belum terdaftar! Penambahan lembur gagal!");
+//            return "redirect:/lembur/add";
+//        }
+//    }
+
     @PostMapping("/lembur/add")
     public String addLemburSubmit(@ModelAttribute LemburModel lembur, RedirectAttributes redir){
         UserModel user = userService.findUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
         GajiModel gaji = user.getGaji();
-        if(lemburService.bandingTanggal(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == true){
+        if(lemburService.bandingTanggal(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == true && lemburService.bandingJam(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == true){
             lembur.setStatusPersetujuan(0);
             lembur.setGaji(gaji);
             lembur.setKompensasiPerJam(120000);
@@ -47,7 +72,10 @@ public class LemburController {
         } else if(lemburService.bandingTanggal(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == false){
             redir.addFlashAttribute("gagal", "Tanggal yang diberikan berbeda!");
             return "redirect:/lembur/add";
-        }else{
+        } else if(lemburService.bandingJam(lembur.getWaktuMulai(), lembur.getWaktuSelesai()) == false){
+            redir.addFlashAttribute("gagal", "Waktu mulai dan selesai tidak sesuai!");
+            return "redirect:/lembur/add";
+        } else{
             redir.addFlashAttribute("gagal", "ID Gaji belum terdaftar! Penambahan lembur gagal!");
             return "redirect:/lembur/add";
         }
@@ -85,5 +113,30 @@ public class LemburController {
         redir.addFlashAttribute("lembur", lembur);
         redir.addFlashAttribute("berhasil", "Lembur berhasil diubah!");
         return "redirect:/lembur/ubah/"+lembur.getId();
+    }
+
+    @GetMapping("/lembur/hapus/{id}")
+    public String hapusLemburFormPage(@PathVariable Integer id, RedirectAttributes redir){
+        LemburModel lembur = lemburService.getLemburById(id);
+        lemburService.deleteLembur(lembur);
+        redir.addFlashAttribute("berhasil", "Lembur berhasil dihapus");
+        return "redirect:/lembur/view";
+    }
+
+    @GetMapping("lembur/view")
+    public String viewLembur(Model model){
+        UserModel user = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (user.getRole().getId() == 6){
+            List<LemburModel> listLembur = lemburService.getListLemburByGaji(user.getGaji());
+            model.addAttribute("listLembur", listLembur);
+            model.addAttribute("karyawan", true);
+            model.addAttribute("hasLembur",  listLembur.size()>0);
+            return "daftar-lembur";
+        }
+        List<LemburModel> listLembur = lemburService.getListLembur();
+        model.addAttribute("listLembur", listLembur);
+        model.addAttribute("karyawan", false);
+        model.addAttribute("hasLembur",  listLembur.size()>0);
+        return "daftar-lembur";
     }
 }

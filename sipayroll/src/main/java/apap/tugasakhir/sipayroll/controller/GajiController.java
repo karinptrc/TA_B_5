@@ -131,7 +131,7 @@ public class GajiController {
 
     @RequestMapping(value = "/gaji/setujui/{id}")
     public String setujuiGaji(
-            @PathVariable(value = "id") Integer id, @ModelAttribute GajiModel gajiSetuju,
+            @PathVariable(value = "id") Integer id,
             RedirectAttributes redir
     ){
         List<GajiModel> listGaji = gajiService.getGajiList();

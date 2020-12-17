@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Tambah Lowongan</title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <style>
+    .judul{
+        font-size: 20px;
+    }
+    </style>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container pm p-5 text-center position-relative min-vh-100">
+    <div class="shadow m-auto bg-white rounded w-50">
+        <div class="card-header bg-dark m-auto text-light p-0">
+            <a class="judul">Tambah Lowongan</a>
+        </div>
+        <div class="card-body m-auto pl-2 pr-2 text-left">
+            <form th:action="@{/lowongan/add}" th:object="${lowongan}" method="POST">
+                Divisi <br>
+                <input type="text" class="form-control" name="divisi"/>
+                <br>
+                Posisi <br>
+                <input type="text" class="form-control" name="posisi"/>
+                <br>
+                Jenis Lowongan<br>
+                <select name="jenisLowongan" class="form-control">
+                    <option value="">Pilih Jenis</option>
+                    <option value="1">Full Time</option>
+                    <option value="2">Part Time</option>
+                    <option value="3">Internship</option>
+                    <option value="4">Freelance</option>
+                </select>
+                <br>
+                Jumlah Karyawan Yang Dibutuhkan<br>
+                <input type="number" class="form-control" name="jumlahKaryawan" placeholder="Masukan Jumlah Karyawan Yang Dibutuhkan">
+                <br>
+                <div class="row pb-3 pr-4 justify-content-end">
+                    <div><button type="submit" name="tambahLowongan" class="bg-dark rounded text-light p-1">Submit</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <h5 th:text="${gagal}" style="color: red;"></h5>
+    <h5 th:text="${berhasil}" style="color: green;"></h5>
+</div>
+
+</body>
+</html>

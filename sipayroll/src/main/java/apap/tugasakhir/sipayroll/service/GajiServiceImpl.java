@@ -33,6 +33,10 @@ public class GajiServiceImpl implements GajiService{
     public GajiModel getGajiById(Integer id) {
         return gajiDb.findById(id).get();
     }
+//    @Override
+//    public GajiModel getGajiByUsername(String username) {
+//        return gajiDb.findByUserUsername(username).get();
+//    }
 
     @Override
     public GajiModel updateGaji(GajiModel gaji) {
@@ -94,6 +98,7 @@ public class GajiServiceImpl implements GajiService{
         }
         return gajiDb.save(gaji);
     }
+
 
     //    @Override
 //    public boolean checkListIdUser(String id){

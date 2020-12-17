@@ -12,7 +12,16 @@
 <div class="container p-5 m-auto position-relative min-vh-100">
     <a th:href="@{/gaji/add}" class="btn btn-outline-primary bg-dark text-light mb-1"> + Tambah Gaji </a>
     <div class="shadow m-auto bg-white rounded text-center">
-        <h3 class="card-header bg-dark text-light">Daftar Gaji</h3>
+        <div class="card-header bg-dark text-light">
+            <div class="row justify-content-end">
+                <div class="col-4 h3 text-center">
+                    Daftar Gaji
+                </div>
+                <div class="col-4 text-right pt-2" th:text="${month}">
+
+                </div>
+            </div>
+        </div>
 
         <div th:if="${changedStatus}" th:object="${gajiUpdated}">
             <div th:if="${statusGaji}" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -44,11 +53,9 @@
                 <tbody>
                 <tr th:if="${hasGaji && karyawan}" th:object="${gaji}">
                     <td th:text="1"></td>
-                    <td th:text="${gaji.user.username}">
-                        <a th:href="@{/gaji/}+${gaji.user.username}" ></a>
-                    </td>
-                    <td th:text="${gaji.gajiPokok}"></td>
-                    <td th:text="${gaji.totalPendapatan}"></td>
+                    <td th:text="${gaji.user.username}"></td>
+                    <td th:text="'Rp'+${gaji.gajiPokok}"></td>
+                    <td th:text="'Rp'+${gaji.totalPendapatan}"></td>
                     <td>
                         <div class="row">
                             <a class="btn btn-info text-light text-center m-auto">lihat</a>
@@ -61,7 +68,8 @@
                     <td th:text="${gaji.totalPendapatan}"></td>
                     <td>
                         <div class="row">
-                            <a class="btn btn-info text-light text-center m-auto">lihat</a>
+                            <a th:href="@{/gaji/}+${gaji.id}+'/'+${gaji.user.username}"
+                               class="btn btn-info text-light text-center m-auto">lihat</a>
                             <a th:href="@{/gaji/update/}+${gaji.id}"
                                class="btn btn-warning text-light text-center m-auto pl-1 pr-1"
                                sec:authorize="hasAnyAuthority('Kepala Departemen HR','Staff Payroll')">ubah</a>
@@ -70,9 +78,9 @@
                                sec:authorize="hasAnyAuthority('Kepala Departemen HR','Staff Payroll')">hapus</a>
                         </div>
                     </td>
-                    <td>
+                    <td sec:authorize="hasAnyAuthority('Kepala Departemen HR')">
                         <div class="row justify-content-center" th:if="${gaji.statusPersetujuan==0}"
-                             sec:authorize="hasAnyAuthority('Kepala Departemen HR')">
+                             >
                             <a th:href="@{/gaji/setujui/}+${gaji.id}" class="btn btn-success
                             text-light text-center mx-1">setujui</a>
                             <a th:href="@{/gaji/tolak/}+${gaji.id}" class="btn btn-danger
@@ -89,7 +97,9 @@
                     </td>
                 </tr>
                 <tr th:unless="${hasGaji}">
-                    <div th:text="'Belum memiliki daftar gaji'" class="text-center font-weight-bold font-italic pb-2 text-danger"></div>
+                    <div th:text="'Belum memiliki daftar gaji'" class="text-center font-weight-bold font-italic pb-2 text-danger">
+                        
+                    </div>
                 </tr>
                 </tbody>
             </table>

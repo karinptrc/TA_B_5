@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/gaji").hasAnyAuthority("Karyawan", "Kepala Departemen HR", "Staff Payroll")
                 .antMatchers("/gaji/setujui/**", "/gaji/tolak/**").hasAuthority("Kepala Departemen HR")
                 //tambah lembur hanya karyawan
-//                .antMatchers("/lembur/add").hasAnyAuthority("Karyawan")
+                .antMatchers("/lembur/add").hasAnyAuthority("Karyawan")
                 .antMatchers("/lembur/ubah").hasAnyAuthority("Karyawan", "Kepala Departemen HR", "Staff Payroll")
 
                 .antMatchers("/lembur/hapus").hasAnyAuthority("Karyawan", "Kepala Departemen HR", "Staff Payroll")

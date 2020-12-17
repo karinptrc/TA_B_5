@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -28,6 +29,7 @@ public class LemburController {
     @GetMapping("/lembur/add")
     public String addLemburFormPage(Model model){
         model.addAttribute("gaji", new GajiModel());
+        model.addAttribute("dateTime", LocalDateTime.now());
         return "form-add-lembur";
     }
 
@@ -104,6 +106,7 @@ public class LemburController {
     public String ubahLemburFormPage(@PathVariable Integer id, Model model){
         LemburModel lembur = lemburService.getLemburById(id);
         model.addAttribute("lembur", lembur);
+        model.addAttribute("dateTime", LocalDateTime.now());
         return "form-ubah-lembur";
     }
 
@@ -131,12 +134,14 @@ public class LemburController {
             model.addAttribute("listLembur", listLembur);
             model.addAttribute("karyawan", true);
             model.addAttribute("hasLembur",  listLembur.size()>0);
+            model.addAttribute("dateTime", LocalDateTime.now());
             return "daftar-lembur";
         }
         List<LemburModel> listLembur = lemburService.getListLembur();
         model.addAttribute("listLembur", listLembur);
         model.addAttribute("karyawan", false);
         model.addAttribute("hasLembur",  listLembur.size()>0);
+        model.addAttribute("dateTime", LocalDateTime.now());
         return "daftar-lembur";
     }
 }

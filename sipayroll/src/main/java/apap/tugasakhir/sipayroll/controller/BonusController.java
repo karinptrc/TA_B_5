@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +37,7 @@ public class BonusController {
         List<JenisBonusModel> listJenisBonus = jenisBonusService.getListJenisBonus();
         model.addAttribute("listUser", listUser);
         model.addAttribute("listJenisBonus", listJenisBonus);
+        model.addAttribute("dateTime", LocalDateTime.now());
         return "form-add-bonus";
     }
 

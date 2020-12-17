@@ -64,6 +64,7 @@ public class UserController {
     @RequestMapping("/updatePassword")
     public String updateUserPage(Model model){
         model.addAttribute("listRole", roleService.findAll());
+        model.addAttribute("dateTime", LocalDateTime.now());
         return "ubah-password";
     }
 

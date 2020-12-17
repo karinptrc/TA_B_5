@@ -23,30 +23,30 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse navbar-toggleable-xse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a type="submit" class="nav-link text-light" th:href="@{/}"> Halaman Utama </a></li>
                 <li class="nav-item dropdown"><a type="submit" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Pengguna </a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item" sec:authorize="hasAuthority('Kepala Departemen HR')"><a type="submit" class="nav-link text-dark" th:href="@{/user/profil}"> Profil </a></li>
+                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/user/profil}"> Profil </a></li>
                         <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/user/updatePassword}"> Ubah Password </a></li>
-                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/user/add}"> Tambah Pengguna </a></li>
+                        <li class="dropdown-item" sec:authorize="hasAuthority('Kepala Departemen HR')"><a type="submit" class="nav-link text-dark" th:href="@{/user/add}"> Tambah Pengguna </a></li>
                     </ul>
                 </li>
-                <li class="navbar-item dropdown"><a type="submit" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Gaji </a>
+                <li class="navbar-item dropdown" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll', 'Karyawan')"><a type="submit" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Gaji </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/gaji}"> Daftar Gaji </a></li>
-                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/gaji/add}"> Tambah Gaji </a></li>
+                        <li class="dropdown-item" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll')"><a type="submit" class="nav-link text-dark" th:href="@{/gaji/add}"> Tambah Gaji </a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown"><a type="submit" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Lembur </a>
+                <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll', 'Karyawan')"><a type="submit" class="nav-link text-light" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Lembur </a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" > Daftar Lembur </a></li>
-                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/lembur/add}"> Tambah Lembur </a></li>
+                        <li class="dropdown-item"><a type="submit" class="nav-link text-dark" th:href="@{/lembur/view}"> Daftar Lembur </a></li>
+                        <li class="dropdown-item" sec:authorize="hasAuthority('Karyawan')"><a type="submit" class="nav-link text-dark" th:href="@{/lembur/add}"> Tambah Lembur </a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a type="submit" class="nav-link text-light"> Data Karyawan Lama </a></li>
-                <li class="nav-item"><a type="submit" class="nav-link text-light" th:href="@{/bonus/add}"> Tambah Bonus </a></li>
+                <li class="nav-item" sec:authorize="hasAnyAuthority('Kepala Bagian', 'Kepala Departemen HR')"><a type="submit" class="nav-link text-light" th:href="@{/bonus/add}"> Tambah Bonus </a></li>
+                <li class="nav-item"  sec:authorize="hasAuthority('Staff Payroll')"><a type="submit" class="nav-link text-light" th:href="@{/lowongan/add}"> Request Lowongan </a></li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item text-secondary" th:text="${pagetitle}"></li>

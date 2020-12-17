@@ -1,6 +1,9 @@
-package apap.tugasakhir.sipayroll.controller;
+package apap.tugasakhir.sipayroll.restcontroller;
 
+import apap.tugasakhir.sipayroll.model.BonusModel;
 import apap.tugasakhir.sipayroll.model.LaporanPesertaPelatihanModel;
+import apap.tugasakhir.sipayroll.rest.BaseResponseLaporan;
+import apap.tugasakhir.sipayroll.rest.LaporanDTO;
 import apap.tugasakhir.sipayroll.service.BonusRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,14 +23,21 @@ public class BonusRestController {
     BonusRestService bonusRestService;
 
     @PostMapping(value = "/laporan")
-    private LaporanPesertaPelatihanModel laporanPesertaPelatihan(@Valid @RequestBody LaporanPesertaPelatihanModel laporan,
-                                                                 BindingResult bindingResult){
+    private BaseResponseLaporan laporanPesertaPelatihan(@Valid @RequestBody LaporanDTO laporan,
+                                                        BindingResult bindingResult){
+        BaseResponseLaporan response = new BaseResponseLaporan();
         if (bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field"
             );
         }else {
-            return bonusRestService.createLaporan(laporan);
+            String username = laporan.getUsername();
+            Integer jumlahPelatihan = laporan.getJumlahPelatihan();
+            bonusRestService.createLaporan(username, jumlahPelatihan);
+            response.setStatus(200);
+            response.setMessage("success");
+            response.setResult(laporan);
+            return response;
         }
     }
 }

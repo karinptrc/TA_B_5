@@ -29,7 +29,7 @@ public class GajiModel {
     @Column(name = "tanggalMasuk")
 //    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonIgnore
+//    @JsonIgnore
     private LocalDate tanggalMasuk;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -57,6 +57,7 @@ public class GajiModel {
     @JsonIgnore
     private List<BonusModel> listBonus;
 
+    @JsonIgnore
     private Integer totalPendapatan;
 
     public Integer getId() {

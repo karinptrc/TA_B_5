@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import javax.validation.constraints.Null;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -67,6 +65,21 @@ public class BonusServiceImplementation implements BonusService{
             }
         }
         return total;
+    }
+
+    @Override
+    public BonusModel getBonusById(Integer id) {
+        return bonusDb.findById(id).get();
+    }
+
+//    @Override
+//    public Optional<BonusModel> getBonusByUsername(String username) {
+//        return bonusDb.findByGajiUserUsername(username);
+//    }
+
+    @Override
+    public List<BonusModel> getBonusByIdGaji(Integer id) {
+        return bonusDb.findByGajiId(id);
     }
 
     public boolean validateBonus(GajiModel gaji, Integer jenis){

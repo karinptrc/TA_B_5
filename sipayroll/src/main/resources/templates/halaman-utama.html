@@ -19,19 +19,19 @@
                 <div class="text-center m-auto col">
                     <div class="text-center pb-3"><h3>Daftar Fitur:</h3></div>
                     <div class="card-group row text-center">
-                        <div class="pm pl-2 pr-2 col"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-5 pr-5 pt-1 pb-2 rounded">Daftar Gaji</a></div>
-                        <div class="pm pl-2 pr-2 col"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{/gaji/add}">Tambah Gaji</a></div>
-                    </div><br>
-                    <div class="card-group row text-center">
-                        <div class="pm pl-2 pr-2 col"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded">Daftar Lembur</a></div>
-                        <div class="pm pl-2 pr-2 col"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{/lembur/add}">Tambah Lembur</a></div>
-                    </div><br>
-                    <div class="card-group row text-center">
                         <div class="pm pl-2 pr-2 col" sec:authorize="hasAuthority('Kepala Departemen HR')" ><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-3 pr-3 pt-1 pb-2 rounded" th:href="@{/user/add}">Tambah Pengguna</a></div>
-                        <div class="pm pl-2 pr-2 col"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-3 pr-3 pt-1 pb-2 rounded">Data Karyawan Lama</a></div>
+                    </div><br>
+                    <div class="card-group row text-center" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll', 'Karyawan')">
+                        <div class="pm pl-2 pr-2 col"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-5 pr-5 pt-1 pb-2 rounded" th:href="@{/gaji}">Daftar Gaji</a></div>
+                        <div class="pm pl-2 pr-2 col" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll')"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{/gaji/add}">Tambah Gaji</a></div>
+                    </div><br>
+                    <div class="card-group row text-center" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll', 'Karyawan')">
+                        <div class="pm pl-2 pr-2 col"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{lembur/view}">Daftar Lembur</a></div>
+                        <div class="pm pl-2 pr-2 col" sec:authorize="hasAuthority('Karyawan')"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{/lembur/add}">Tambah Lembur</a></div>
                     </div><br>
                     <div class="card-group row text-center">
                         <div class="pm pl-2 pr-2 col"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{/bonus/add}">Tambah Bonus</a></div>
+                        <div class="pm pl-2 pr-2 col" sec:authorize="hasAuthority('Staff Payroll')"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{/lowongan/add}">Request Lowongan</a></div>
                     </div><br>
                 </div>
             </div>

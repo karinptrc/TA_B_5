@@ -33,6 +33,10 @@ public class GajiServiceImpl implements GajiService{
     public GajiModel getGajiById(Integer id) {
         return gajiDb.findById(id).get();
     }
+//    @Override
+//    public GajiModel getGajiByUsername(String username) {
+//        return gajiDb.findByUserUsername(username).get();
+//    }
 
     @Override
     public GajiModel updateGaji(GajiModel gaji) {
@@ -62,18 +66,39 @@ public class GajiServiceImpl implements GajiService{
         return gajiDb.findAll();
     }
 
+//    @Override
+//    public GajiModel updateStatusGaji(GajiModel gajiModel, Integer status) {
+//        GajiModel gaji = gajiDb.findById(gajiModel.getId()).get();
+//        if (status == 1){
+//            //jika gaji ditolak
+//            gaji.setStatusPersetujuan(1);
+//            gaji.setPenyetuju();
+//        } else {
+//            //jika gaji disetujui
+//            gaji.setStatusPersetujuan(2);
+//        }
+//        return gajiDb.save(gaji);
+//    }
+
+
     @Override
-    public GajiModel updateStatusGaji(Integer idGaji, Integer status) {
-        GajiModel gaji = gajiDb.findById(idGaji).get();
-        if (status == 1){
-            //jika gaji ditolak
-            gaji.setStatusPersetujuan(1);
-        } else {
-            //jika gaji disetujui
+    public GajiModel setujuiGaji(GajiModel gaji, UserModel user) {
+        if (gaji.getStatusPersetujuan() == 0){
             gaji.setStatusPersetujuan(2);
+            gaji.setPenyetuju(user);
         }
         return gajiDb.save(gaji);
     }
+
+    @Override
+    public GajiModel tolakGaji(GajiModel gaji, UserModel user) {
+        if (gaji.getStatusPersetujuan() == 0){
+            gaji.setStatusPersetujuan(1);
+            gaji.setPenyetuju(user);
+        }
+        return gajiDb.save(gaji);
+    }
+
 
     //    @Override
 //    public boolean checkListIdUser(String id){

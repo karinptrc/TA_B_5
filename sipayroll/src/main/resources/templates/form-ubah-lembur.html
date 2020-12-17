@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Form Tambah Lembur</title>
+    <title>Form Ubah Lembur</title>
 
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
+<nav th:replace="fragments/fragment :: navbar (pagetitle='Ubah Lembur')"></nav>
 
 <div class="row" sec:authorize="hasAuthority('Karyawan')">
 <div class="container pm p-5 text-center position-relative min-vh-100">

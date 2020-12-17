@@ -87,4 +87,40 @@ public class LemburServiceImpl implements LemburService {
         }
         return totalLembur;
     }
+
+    @Override
+    public Boolean bandingJam(Date mulai, Date selesai) {
+        boolean jamValid;
+        String pattern = "HH:mm";
+        DateFormat dateformat = new SimpleDateFormat(pattern);
+        String[] jammulai = dateformat.format(mulai).split(":");
+        String[] jamselesai = dateformat.format(selesai).split(":");
+        if (Integer.parseInt(jammulai[0]) <= Integer.parseInt(jamselesai[0]) && Integer.parseInt(jammulai[1]) < Integer.parseInt(jamselesai[1])
+                || Integer.parseInt(jammulai[0]) < Integer.parseInt(jamselesai[0]) && Integer.parseInt(jammulai[1]) <= Integer.parseInt(jamselesai[1])
+                || Integer.parseInt(jammulai[0]) < Integer.parseInt(jamselesai[0])&& Integer.parseInt(jammulai[1]) >= Integer.parseInt(jamselesai[1]))
+        {
+            jamValid = true;
+        } else {
+            jamValid = false;
+        }
+        // System.out.println("jam mulai " + jammulai[0] + jammulai[1]);
+        // System.out.println("jam selesai " + jamselesai[0] + jamselesai[1]);
+        // System.out.println(jamValid);
+        return jamValid;
+    }
+
+    @Override
+    public void deleteLembur(LemburModel lembur) {
+        lemburDb.delete(lembur);
+    }
+
+    @Override
+    public List<LemburModel> getListLembur() {
+        return lemburDb.findAll();
+    }
+
+    @Override
+    public List<LemburModel> getListLemburByGaji(GajiModel gaji) {
+        return lemburDb.getLemburModelsByGaji(gaji);
+    }
 }

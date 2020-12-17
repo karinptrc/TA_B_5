@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/lembur/hapus").hasAnyAuthority("Karyawan", "Kepala Departemen HR", "Staff Payroll")
                 .antMatchers("/lembur/view").hasAnyAuthority("Karyawan", "Kepala Departemen HR", "Staff Payroll")
-//                .antMatchers("/bonus/add").hasAuthority("Staff Payroll")
+                .antMatchers("/bonus/add").hasAnyAuthority("Kepala Bagian Pelatihan", "Kepala Departemen HR")
                 .antMatchers("/lowongan/add").hasAuthority("Staff Payroll")
 
                 .anyRequest().authenticated()
@@ -38,7 +38,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll()
+                .and()
+                .csrf()
+                .disable();
     }
 
     @Bean

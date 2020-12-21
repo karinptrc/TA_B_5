@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -219,6 +220,7 @@ public class GajiController {
         model.addAttribute("gaji", gaji);
         model.addAttribute("hasPelatihan", hasPelatihan);
         model.addAttribute("totalBonus", totalBonus);
+        model.addAttribute("dateTime", LocalDateTime.now());
         return "view-detail-gaji";
     }
 

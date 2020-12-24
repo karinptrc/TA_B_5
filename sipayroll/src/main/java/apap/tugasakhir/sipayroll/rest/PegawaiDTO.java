@@ -4,14 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
 
 @JsonIgnoreProperties(value={"roleName"},allowGetters = true)
-public class PegawaiDTO {
+public class PegawaiDTO implements Serializable {
     @NotNull
     @Size(max = 200)
     private String username;
@@ -31,8 +30,7 @@ public class PegawaiDTO {
     private String tempatLahir;
 
     @NotNull
-//    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
-    @DateTimeFormat(pattern = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
     private Date tanggalLahir;
 
     @NotNull

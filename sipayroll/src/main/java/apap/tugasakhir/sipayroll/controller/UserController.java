@@ -40,7 +40,6 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addUserSubmit(@ModelAttribute PegawaiDTO pegawai,
                                 @RequestParam("password") String password,
-                                @RequestParam("tanggalLahir") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date tanggalLahir,
                                 RedirectAttributes redir) {
         if(userService.checkIfUsernameIsUsed(pegawai.getUsername())){
             redir.addFlashAttribute("hasMessage", true);
@@ -58,7 +57,6 @@ public class UserController {
         user.setPassword(password);
         user.setRole(role);
         userService.addUser(user);
-        pegawai.setTanggalLahir(tanggalLahir);
         pegawaiRestAPIService.addPegawai(pegawai);
         redir.addFlashAttribute("hasMessage", true);
         redir.addFlashAttribute("message", "user " + user.getUsername() + " berhasil ditambahkan");

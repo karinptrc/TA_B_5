@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -39,6 +40,7 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addUserSubmit(@ModelAttribute PegawaiDTO pegawai,
                                 @RequestParam("password") String password,
+                                @RequestParam("tanggalLahir") String tanggalLahir,
                                 RedirectAttributes redir){
         if(userService.checkIfUsernameIsUsed(pegawai.getUsername())){
             redir.addFlashAttribute("hasMessage", true);
@@ -56,6 +58,9 @@ public class UserController {
         user.setPassword(password);
         user.setRole(role);
         userService.addUser(user);
+        SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+        Date date=formatter.parse(tanggalLahir);
+        pegawai.setTanggalLahir(date);
         pegawaiRestAPIService.addPegawai(pegawai);
         redir.addFlashAttribute("hasMessage", true);
         redir.addFlashAttribute("message", "user " + user.getUsername() + " berhasil ditambahkan");

@@ -59,8 +59,10 @@ public class UserController {
         user.setPassword(password);
         user.setRole(role);
         userService.addUser(user);
+        System.out.println(tanggalLahir);
         SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         Date date=formatter.parse(tanggalLahir);
+        System.out.println(date);
         pegawai.setTanggalLahir(date);
         pegawaiRestAPIService.addPegawai(pegawai);
         redir.addFlashAttribute("hasMessage", true);

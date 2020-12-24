@@ -55,7 +55,7 @@ public class UserController {
         user.setPassword(password);
         user.setRole(role);
         userService.addUser(user);
-//        pegawaiRestAPIService.addPegawai(pegawai);
+        pegawaiRestAPIService.addPegawai(pegawai);
         redir.addFlashAttribute("hasMessage", true);
         redir.addFlashAttribute("message", "user " + user.getUsername() + " berhasil ditambahkan");
         return "redirect:/user/add";

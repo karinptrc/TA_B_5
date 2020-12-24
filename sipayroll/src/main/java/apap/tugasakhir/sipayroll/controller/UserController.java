@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -41,7 +42,7 @@ public class UserController {
     public String addUserSubmit(@ModelAttribute PegawaiDTO pegawai,
                                 @RequestParam("password") String password,
                                 @RequestParam("tanggalLahir") String tanggalLahir,
-                                RedirectAttributes redir){
+                                RedirectAttributes redir) throws ParseException {
         if(userService.checkIfUsernameIsUsed(pegawai.getUsername())){
             redir.addFlashAttribute("hasMessage", true);
             redir.addFlashAttribute("message", "username " + pegawai.getUsername() + " sudah digunakan. silahkan ubah kembali username Anda.");

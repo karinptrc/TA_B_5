@@ -31,7 +31,7 @@ public class PegawaiDTO implements Serializable {
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
-    private Date tanggalLahir;
+    private String tanggalLahir;
 
     @NotNull
     @Size(max = 200)
@@ -72,11 +72,11 @@ public class PegawaiDTO implements Serializable {
         this.tempatLahir = tempatLahir;
     }
 
-    public Date getTanggalLahir() {
+    public String getTanggalLahir() {
         return tanggalLahir;
     }
 
-    public void setTanggalLahir(Date tanggalLahir) {
+    public void setTanggalLahir(String tanggalLahir) {
         this.tanggalLahir = tanggalLahir;
     }
 

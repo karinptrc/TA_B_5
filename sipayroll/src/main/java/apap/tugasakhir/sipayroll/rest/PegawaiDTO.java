@@ -31,7 +31,8 @@ public class PegawaiDTO {
     private String tempatLahir;
 
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
+    @DateTimeFormat(pattern = DateTimeFormat.ISO.DATE)
     private Date tanggalLahir;
 
     @NotNull

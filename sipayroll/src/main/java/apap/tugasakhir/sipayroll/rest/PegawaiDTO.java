@@ -31,8 +31,9 @@ public class PegawaiDTO {
     private String tempatLahir;
 
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
-    private Date tanggalLahir;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
+//    private Date tanggalLahir;
+    private String tanggalLahir;
 
     @NotNull
     @Size(max = 200)
@@ -67,19 +68,17 @@ public class PegawaiDTO {
         this.noTelepon = noTelepon;
     }
 
-    public String getTempatLahir() {
-        return tempatLahir;
-    }
+    public String getTempatLahir() { return tempatLahir; }
 
     public void setTempatLahir(String tempatLahir) {
         this.tempatLahir = tempatLahir;
     }
 
-    public Date getTanggalLahir() {
+    public String getTanggalLahir() {
         return tanggalLahir;
     }
 
-    public void setTanggalLahir(Date tanggalLahir) {
+    public void setTanggalLahir(String tanggalLahir) {
         this.tanggalLahir = tanggalLahir;
     }
 

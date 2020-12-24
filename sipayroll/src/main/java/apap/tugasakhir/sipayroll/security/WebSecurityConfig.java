@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/api/**").permitAll()
-                .antMatchers("/user/add").hasAuthority("Kepala Departemen HR")
+//                .antMatchers("/user/add").hasAuthority("Kepala Departemen HR")
                 .antMatchers("/gaji").hasAnyAuthority("Karyawan", "Kepala Departemen HR", "Staff Payroll")
                 .antMatchers("/gaji/setujui/**", "/gaji/tolak/**").hasAuthority("Kepala Departemen HR")
                 .antMatchers("/lembur/add").hasAnyAuthority("Karyawan")
@@ -46,20 +46,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder encoder(){ return new BCryptPasswordEncoder(); }
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-//        auth.inMemoryAuthentication()
-//                .passwordEncoder(encoder())
-//                .withUser("admin").password(encoder().encode("admin1234"))
-//                .roles("Kepala Departemen HR");
-//    }
-
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+        auth.inMemoryAuthentication()
+                .passwordEncoder(encoder())
+                .withUser("admin").password(encoder().encode("admin1234"))
+                .roles("Kepala Departemen HR");
     }
+
+//    @Autowired
+//    private UserDetailsService userDetailsService;
+//
+//    @Autowired
+//    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
+//        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+//    }
 
 }

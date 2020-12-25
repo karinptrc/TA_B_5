@@ -1,16 +1,13 @@
 package apap.tugasakhir.sipayroll.rest;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.util.Date;
 
 @JsonIgnoreProperties(value={"roleName"},allowGetters = true)
-public class PegawaiDTO implements Serializable {
+public class PegawaiDTO {
     @NotNull
     @Size(max = 200)
     private String username;

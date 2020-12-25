@@ -59,7 +59,8 @@
                     <td th:text="'Rp'+${gaji.totalPendapatan}"></td>
                     <td>
                         <div class="row">
-                            <a class="btn btn-info text-light text-center m-auto">lihat</a>
+                            <a th:href="@{/gaji/}+${gaji.id}+'/'+${gaji.user.username}"
+                               class="btn btn-info text-light text-center m-auto">lihat</a>
                         </div>
                     </td>
                 <tr th:unless="${hasGaji && karyawan}" th:each="gaji, iterationStatus : ${listGaji}">

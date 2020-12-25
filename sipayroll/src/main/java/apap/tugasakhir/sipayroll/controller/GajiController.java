@@ -123,7 +123,15 @@ public class GajiController {
             gaji.setTotalPendapatan(gajiTambahan);
             gajiTambahan = 0;
         }
+
+        List<UserModel> listUser = userService.getUserList();
+        HashMap<String, String> listUserAssigned = new HashMap<String, String>();
+        for(UserModel userAssigned : listUser){
+            listUserAssigned.put(userAssigned.getId(), userAssigned.getUsername());
+        }
+
         model.addAttribute("listGaji", listGaji);
+        model.addAttribute("listUser", listUserAssigned);
         model.addAttribute("karyawan", false);
         model.addAttribute("hasGaji",  listGaji.size()>0);
         model.addAttribute("month", LocalDate.now().getMonth());

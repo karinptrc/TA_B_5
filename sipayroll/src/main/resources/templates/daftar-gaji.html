@@ -10,7 +10,8 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar (pagetitle='Daftar Gaji')"></nav>
 <div class="container p-5 m-auto position-relative min-vh-100">
-    <a th:href="@{/gaji/add}" class="btn btn-outline-primary bg-dark text-light mb-1"> + Tambah Gaji </a>
+    <a th:if="not ${karyawan}" th:href="@{/gaji/add}"
+       class="btn btn-outline-primary bg-dark text-light mb-1"> + Tambah Gaji </a>
     <div class="shadow m-auto bg-white rounded text-center">
         <div class="card-header bg-dark text-light">
             <div class="row justify-content-end">

@@ -53,7 +53,8 @@
                 <tbody>
                 <tr th:if="${hasGaji && karyawan}" th:object="${gaji}">
                     <td th:text="1"></td>
-                    <td th:text="${listUser.get(gaji.user.id)}"></td>
+<!--                    <td th:text="${gaji.get(gaji.user.id)}"></td>-->
+                    <td th:text="${gaji.user.username}"></td>
                     <td th:text="'Rp'+${gaji.gajiPokok}"></td>
                     <td th:text="'Rp'+${gaji.totalPendapatan}"></td>
                     <td>

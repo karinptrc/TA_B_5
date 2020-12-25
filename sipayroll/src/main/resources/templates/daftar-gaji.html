@@ -53,7 +53,7 @@
                 <tbody>
                 <tr th:if="${hasGaji && karyawan}" th:object="${gaji}">
                     <td th:text="1"></td>
-                    <td th:text="${gaji.user.username}"></td>
+                    <td th:text="${gaji.user.getUsername()}"></td>
                     <td th:text="'Rp'+${gaji.gajiPokok}"></td>
                     <td th:text="'Rp'+${gaji.totalPendapatan}"></td>
                     <td>
@@ -63,12 +63,12 @@
                     </td>
                 <tr th:unless="${hasGaji && karyawan}" th:each="gaji, iterationStatus : ${listGaji}">
                     <td th:text="${iterationStatus.count}"></td>
-                    <td th:text="${gaji.user.username}"></td>
+                    <td th:text="${gaji.user.getUsername()}"></td>
                     <td th:text="${gaji.gajiPokok}"></td>
                     <td th:text="${gaji.totalPendapatan}"></td>
                     <td>
                         <div class="row">
-                            <a th:href="@{/gaji/}+${gaji.id}+'/'+${gaji.user.username}"
+                            <a th:href="@{/gaji/}+${gaji.id}+'/'+${gaji.user.getUsername()}"
                                class="btn btn-info text-light text-center m-auto">lihat</a>
                             <a th:href="@{/gaji/update/}+${gaji.id}"
                                class="btn btn-warning text-light text-center m-auto pl-1 pr-1"

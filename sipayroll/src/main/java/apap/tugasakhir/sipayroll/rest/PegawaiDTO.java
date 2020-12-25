@@ -30,7 +30,6 @@ public class PegawaiDTO implements Serializable {
     private String tempatLahir;
 
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
     private String tanggalLahir;
 
     @NotNull

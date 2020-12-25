@@ -34,7 +34,7 @@
                             </div>
                             <div class="row" th:if="${isPegawai}">
                                 <div th:text="'Tanggal Lahir'" class="col"></div>
-                                <div th:text="': ' + ${#dates.format(pegawai.tanggalLahir, 'dd/MM/yyyy HH:mm')}" class="col"></div>
+                                <div th:text="': ' + ${pegawai.tanggalLahir}" class="col"></div>
                             </div>
                             <div class="row" th:if="${isPegawai}">
                                 <div th:text="'Alamat'" class="col"></div>

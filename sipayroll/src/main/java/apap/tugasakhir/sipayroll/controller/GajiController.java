@@ -123,7 +123,11 @@ public class GajiController {
             gaji.setTotalPendapatan(gajiTambahan);
             gajiTambahan = 0;
         }
+
+        List<UserModel> listUser = userService.getUserList();
+
         model.addAttribute("listGaji", listGaji);
+        model.addAttribute("listUser", listUser);
         model.addAttribute("karyawan", false);
         model.addAttribute("hasGaji",  listGaji.size()>0);
         model.addAttribute("month", LocalDate.now().getMonth());

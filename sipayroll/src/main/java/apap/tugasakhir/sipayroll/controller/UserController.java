@@ -8,6 +8,7 @@ import apap.tugasakhir.sipayroll.service.PegawaiRestAPIService;
 import apap.tugasakhir.sipayroll.service.RoleService;
 import apap.tugasakhir.sipayroll.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/user")
@@ -38,7 +40,7 @@ public class UserController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addUserSubmit(@ModelAttribute PegawaiDTO pegawai,
                                 @RequestParam("password") String password,
-                                RedirectAttributes redir){
+                                RedirectAttributes redir) {
         if(userService.checkIfUsernameIsUsed(pegawai.getUsername())){
             redir.addFlashAttribute("hasMessage", true);
             redir.addFlashAttribute("message", "username " + pegawai.getUsername() + " sudah digunakan. silahkan ubah kembali username Anda.");
@@ -71,7 +73,8 @@ public class UserController {
     @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
     public String changePassword(@RequestParam("oldpassword") String oldpassword,
                                  @RequestParam("password") String password,
-                                 @RequestParam("confirmpassword") String confirmpassword, RedirectAttributes redir){
+                                 @RequestParam("confirmpassword") String confirmpassword,
+                                 RedirectAttributes redir){
 
         UserModel user = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 

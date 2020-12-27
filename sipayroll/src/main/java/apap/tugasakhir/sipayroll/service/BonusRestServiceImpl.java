@@ -2,7 +2,6 @@ package apap.tugasakhir.sipayroll.service;
 
 import apap.tugasakhir.sipayroll.model.BonusModel;
 import apap.tugasakhir.sipayroll.model.GajiModel;
-import apap.tugasakhir.sipayroll.model.LaporanPesertaPelatihanModel;
 import apap.tugasakhir.sipayroll.model.UserModel;
 import apap.tugasakhir.sipayroll.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -42,11 +40,12 @@ public class BonusRestServiceImpl implements BonusRestService{
         bonus.setJumlahBonus(jumlahBonus);
         bonus.setTanggal(tanggalDiterima);
         UserModel user = userDb.findByUsername(username);
-        GajiModel gaji = gajiDb.findByUserUsername(username).get();
+        Optional<GajiModel> gaji = gajiDb.findByUserUsername(username);
         if (user != null){
             if (gaji != null){
                 System.out.println("masuk gaji != null, langsung bikin bonus");
-                bonus.setGaji(gaji);
+                GajiModel gajiUser = gajiDb.findByUserUsername(username).get();
+                bonus.setGaji(gajiUser);
                 bonus.setJenis(jenisBonusDb.findById(3));
                 return bonusDb.save(bonus);
             }

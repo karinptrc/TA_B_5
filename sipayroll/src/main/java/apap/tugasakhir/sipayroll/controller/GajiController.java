@@ -109,6 +109,7 @@ public class GajiController {
             model.addAttribute("karyawan", true);
             model.addAttribute("hasGaji",  gaji != null);
             model.addAttribute("month", LocalDate.now().getMonth());
+            model.addAttribute("dateTime", LocalDateTime.now());
             return "daftar-gaji";
         }
 
@@ -135,6 +136,7 @@ public class GajiController {
         model.addAttribute("karyawan", false);
         model.addAttribute("hasGaji",  listGaji.size()>0);
         model.addAttribute("month", LocalDate.now().getMonth());
+        model.addAttribute("dateTime", LocalDateTime.now());
         return "daftar-gaji";
     }
 

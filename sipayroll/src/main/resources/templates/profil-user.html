@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav th:replace="fragments/fragment :: navbar (pagetitle='Profil')"></nav>
-    <div class="container pm p-5 text-center position-relative min-vh-100">
+    <div class="container pm p-5 text-center position-relative min-vh-100 min-vw-100">
         <div class="m-auto w-75 pl-4 pr-4">
             <div class="pl-5 pr-5 m-auto">
                 <div class="shadow m-auto bg-white rounded w-75">
@@ -34,7 +34,7 @@
                             </div>
                             <div class="row" th:if="${isPegawai}">
                                 <div th:text="'Tanggal Lahir'" class="col"></div>
-                                <div th:text="': ' + ${#dates.format(pegawai.tanggalLahir, 'dd/MM/yyyy HH:mm')}" class="col"></div>
+                                <div th:text="': ' + ${pegawai.tanggalLahir}" class="col"></div>
                             </div>
                             <div class="row" th:if="${isPegawai}">
                                 <div th:text="'Alamat'" class="col"></div>
@@ -49,6 +49,7 @@
                 </div>
             </div>
         </div><br><br>
+    </div>
     <footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 </html>

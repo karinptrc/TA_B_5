@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class LowonganController {
     @Autowired
@@ -21,6 +23,7 @@ public class LowonganController {
     @RequestMapping("/lowongan/add")
     public String addUserPage(Model model){
         model.addAttribute("lowongan", new LowonganDTO());
+        model.addAttribute("dateTime", LocalDateTime.now());
         return "form-add-lowongan";
     }
 

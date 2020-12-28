@@ -1,7 +1,7 @@
 package apap.tugasakhir.sipayroll.service;
 
-import apap.tugasakhir.sipayroll.model.LaporanPesertaPelatihanModel;
+import apap.tugasakhir.sipayroll.model.BonusModel;
 
 public interface BonusRestService {
-    LaporanPesertaPelatihanModel createLaporan(LaporanPesertaPelatihanModel laporan);
+    BonusModel createLaporan(String username, Integer jumlah);
 }

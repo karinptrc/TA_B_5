@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,7 +123,15 @@ public class GajiController {
             gaji.setTotalPendapatan(gajiTambahan);
             gajiTambahan = 0;
         }
+
+        List<UserModel> listUser = userService.getUserList();
+        HashMap<String, String> listUserAssigned = new HashMap<String, String>();
+        for(UserModel userAssigned : listUser){
+            listUserAssigned.put(userAssigned.getId(), userAssigned.getUsername());
+        }
+
         model.addAttribute("listGaji", listGaji);
+        model.addAttribute("listUser", listUserAssigned);
         model.addAttribute("karyawan", false);
         model.addAttribute("hasGaji",  listGaji.size()>0);
         model.addAttribute("month", LocalDate.now().getMonth());
@@ -219,6 +228,7 @@ public class GajiController {
         model.addAttribute("gaji", gaji);
         model.addAttribute("hasPelatihan", hasPelatihan);
         model.addAttribute("totalBonus", totalBonus);
+        model.addAttribute("dateTime", LocalDateTime.now());
         return "view-detail-gaji";
     }
 

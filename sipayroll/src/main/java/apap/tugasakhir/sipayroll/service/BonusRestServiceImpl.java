@@ -55,6 +55,7 @@ public class BonusRestServiceImpl implements BonusRestService{
             gajiBaru.setPengaju(user);
             gajiBaru.setUser(user);
             gajiBaru.setTanggalMasuk(tanggalDiterima);
+            gajiBaru.setStatusPersetujuan(0);
             gajiDb.save(gajiBaru);
 
             bonus.setGaji(gajiBaru);
@@ -73,6 +74,7 @@ public class BonusRestServiceImpl implements BonusRestService{
         gajiBaru.setPengaju(user);
         gajiBaru.setUser(user);
         gajiBaru.setTanggalMasuk(tanggalDiterima);
+        gajiBaru.setStatusPersetujuan(0);
         gajiDb.save(gajiBaru);
 
         bonus.setGaji(gajiBaru);

@@ -41,10 +41,10 @@
                         <div class="row">
                             <a th:href="@{/lembur/ubah/}+${lembur.id}"
                                class="btn btn-warning text-light text-center m-auto pl-1 pr-1"
-                               sec:authorize="hasAnyAuthority('Kepala Departemen HR','Staff Payroll')">ubah</a>
+                               sec:authorize="hasAnyAuthority('Karyawan','Kepala Departemen HR','Staff Payroll')">ubah</a>
                             <a th:href="@{/lembur/hapus/}+${lembur.id}"
                                class="btn btn-danger text-light text-center m-auto"
-                               sec:authorize="hasAnyAuthority('Kepala Departemen HR','Staff Payroll')">hapus</a>
+                               sec:authorize="hasAnyAuthority('Karyawan','Kepala Departemen HR','Staff Payroll')">hapus</a>
                         </div>
                     </td>
                 <tr th:unless="${hasLembur && karyawan}" th:each="lembur, iterationStatus : ${listLembur}">

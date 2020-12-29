@@ -248,7 +248,13 @@ public class GajiController {
 //        System.out.println(listPeserta.get(0).getNama());
 
         model.addAttribute("pengaju", gaji.getPengaju().getUsername());
-        model.addAttribute("penyetuju", gaji.getPenyetuju().getUsername());
+//        model.addAttribute("penyetuju", gaji.getPenyetuju().getUsername());
+        if (gaji.getPenyetuju() == null){
+            model.addAttribute("penyetuju", "Belum disetujui");
+        }
+        else{
+            model.addAttribute("penyetuju", gaji.getPenyetuju().getUsername());
+        }
         model.addAttribute("totalLembur", totalLembur);
         model.addAttribute("gaji", gaji);
 //        model.addAttribute("user", user);

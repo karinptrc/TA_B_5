@@ -86,7 +86,7 @@ public class LemburController {
     public String hapusLemburFormPage(@PathVariable Integer id, RedirectAttributes redir){
         LemburModel lembur = lemburService.getLemburById(id);
         lemburService.deleteLembur(lembur);
-        redir.addFlashAttribute("berhasil", "Lembur berhasil dihapus");
+        redir.addFlashAttribute("hapus", "Lembur berhasil dihapus");
         return "redirect:/lembur/view";
     }
 
@@ -102,7 +102,13 @@ public class LemburController {
             return "daftar-lembur";
         }
         List<LemburModel> listLembur = lemburService.getListLembur();
+        List<UserModel> listUser = userService.getUserList();
+        HashMap<String, String> listUserAssigned = new HashMap<String, String>();
+        for(UserModel userAssigned : listUser){
+            listUserAssigned.put(userAssigned.getId(), userAssigned.getUsername());
+        }
         model.addAttribute("listLembur", listLembur);
+        model.addAttribute("listUser", listUserAssigned);
         model.addAttribute("karyawan", false);
         model.addAttribute("hasLembur",  listLembur.size()>0);
         model.addAttribute("dateTime", LocalDateTime.now());

@@ -69,7 +69,7 @@
                     <td th:text="${gaji.totalPendapatan}"></td>
                     <td>
                         <div class="row">
-                            <a th:href="@{/gaji/}+${gaji.id}+'/'+${listUser.get(gaji.user.id)}"
+                            <a th:href="@{/gaji/detail/}+${gaji.id}+'/'+${listUser.get(gaji.user.id)}"
                                class="btn btn-info text-light text-center m-auto">lihat</a>
                             <a th:href="@{/gaji/update/}+${gaji.id}"
                                class="btn btn-warning text-light text-center m-auto pl-1 pr-1"

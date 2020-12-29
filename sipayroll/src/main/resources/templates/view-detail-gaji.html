@@ -22,11 +22,11 @@
         <table class="table">
             <tr>
                 <th>UUID User</th>
-                <td th:text="${gaji.user.id}"></td>
+                <td th:text="${userAssigned.keySet().toString().substring(1, userAssigned.keySet().toString().length()-1)}"></td>
             </tr>
             <tr>
                 <th>Nama Pegawai</th>
-                <td th:text="${gaji.user.username}"></td>
+                <td th:text="${userAssigned.get(user.getId())}"></td>
             </tr>
             <tr>
                 <th>Gaji</th>
@@ -36,10 +36,10 @@
                 <th>Total Bonus</th>
                 <td th:text="${totalBonus}"></td>
             </tr>
-<!--            <tr th:each="bonus, iterationStatus : ${bonus}">-->
-<!--                <th>Total Bonus</th>-->
-<!--                <td th:text="${bonus.jumlahBonus}"></td>-->
-<!--            </tr>-->
+            <!--            <tr th:each="bonus, iterationStatus : ${bonus}">-->
+            <!--                <th>Total Bonus</th>-->
+            <!--                <td th:text="${bonus.jumlahBonus}"></td>-->
+            <!--            </tr>-->
             <tr>
                 <th>Total Lembur</th>
                 <td th:text="${totalLembur}"></td>

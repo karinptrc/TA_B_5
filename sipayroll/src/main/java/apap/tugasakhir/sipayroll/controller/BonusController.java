@@ -53,13 +53,15 @@ public class BonusController {
             GajiModel gaji = user.get().getGaji();
             JenisBonusModel jenis =  jenisBonusService.getJenisBonusById(jenisBonus);
             boolean flag = bonusService.addBonus(bonus, gaji, jenis);
-            String pesan = "";
+            String gagal = "";
+            String berhasil = "";
             if(flag){
-                pesan = "Bonus berhasil ditambahkan!";
+                berhasil = "Bonus berhasil ditambahkan!";
+                redir.addFlashAttribute("berhasil",berhasil);
             }else {
-                pesan = "User telah mendapatkan bonus tersebut!";
+                gagal = "User telah mendapatkan bonus tersebut!";
+                redir.addFlashAttribute("gagal",gagal);
             }
-            redir.addFlashAttribute("pesan",pesan);
             return "redirect:/bonus/add";
         }catch (NullPointerException nullPointerException){
             redir.addFlashAttribute("pesan","ID Gaji belum terdaftar! Penambahan bonus gagal!");

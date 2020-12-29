@@ -177,7 +177,7 @@ public class GajiController {
 
 
     ///FITUR 8 -- ANDI
-    @GetMapping(value = "/gaji/{id}/{username}")
+    @GetMapping(value = "/gaji/detail/{id}/{username}")
     public String detailGaji(
             @PathVariable(value = "id") Integer id, @PathVariable(value = "username")String username, Model model){
         GajiModel gaji = gajiService.getGajiById(id);
@@ -198,6 +198,25 @@ public class GajiController {
         BaseResponseGaji fix = response.block();
 
         List<LinkedHashMap<String, String>> peserta = (List<LinkedHashMap<String, String>>)fix.getResult();
+        /// hashmap
+        UserModel user = userService.findUserByUsername(username);
+//        List<UserModel> listUser = userService.getUserList();
+        HashMap<String, String> userAssigned = new HashMap<String, String>();
+        userAssigned.put(user.getId(),user.getUsername());
+//        for(UserModel userAssigned : listUser){
+//            listUserAssigned.put(userAssigned.getId(), userAssigned.getUsername());
+//        }
+//        System.out.println("user="+user.getUsername());
+//        System.out.println("listUser= " + listUser);
+        System.out.println("userAssigned= " + userAssigned);
+        System.out.println("key= " + userAssigned.keySet().toString().substring(1, userAssigned.keySet().toString().length()-1));
+//        System.out.println("value= " + userAssigned.values().toString());
+        System.out.println("tes= " + userAssigned.get(user.getId()));
+
+
+
+        //-----
+
         System.out.println(peserta.size());
         System.out.println(peserta);
         if(peserta.size() == 0){
@@ -228,10 +247,13 @@ public class GajiController {
         model.addAttribute("penyetuju", gaji.getPenyetuju().getUsername());
         model.addAttribute("totalLembur", totalLembur);
         model.addAttribute("gaji", gaji);
+        model.addAttribute("user", user);
+        model.addAttribute("userAssigned", userAssigned);
         model.addAttribute("hasPelatihan", hasPelatihan);
         model.addAttribute("totalBonus", totalBonus);
         model.addAttribute("dateTime", LocalDateTime.now());
         return "view-detail-gaji";
     }
+
 
 }

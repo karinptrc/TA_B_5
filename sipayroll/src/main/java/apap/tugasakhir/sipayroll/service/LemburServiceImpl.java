@@ -78,7 +78,7 @@ public class LemburServiceImpl implements LemburService {
 //            System.out.println(lembur.getWaktuMulai().getMonth()+1);
 //            System.out.println(lembur.getWaktuMulai());
             // get month of waktuMulai matches with current month
-            if(lembur.getWaktuMulai().getMonth()+1 == currentMonth){
+            if(lembur.getWaktuMulai().getMonth()+1 == currentMonth && lembur.getStatusPersetujuan()==2){
                 totalLembur += lembur.getKompensasiPerJam() * calculateHours(lembur);
 //                System.out.println(calculateAmount(lembur));
 //                System.out.println(lembur.getKompensasiPerJam());

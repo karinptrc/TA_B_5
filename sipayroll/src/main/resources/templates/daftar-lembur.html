@@ -36,7 +36,11 @@
                     <td th:text="${lembur.waktuMulai}"></td>
                     <td th:text="${lembur.waktuSelesai}"></td>
                     <td th:text="${lembur.kompensasiPerJam}"></td>
-                    <td th:text="${lembur.statusPersetujuan}"></td>
+                    <td>
+                        <div th:if="${lembur.statusPersetujuan == 0}">Menunggu Persetujuan</div>
+                        <div th:if="${lembur.statusPersetujuan == 1}">Ditolak</div>
+                        <div th:if="${lembur.statusPersetujuan == 2}">Disetujui</div>
+                    </td>
                     <td>
                         <div class="row">
                             <a th:href="@{/lembur/ubah/}+${lembur.id}"
@@ -54,7 +58,11 @@
                     <td th:text="${lembur.waktuMulai}"></td>
                     <td th:text="${lembur.waktuSelesai}"></td>
                     <td th:text="${lembur.kompensasiPerJam}"></td>
-                    <td th:text="${lembur.statusPersetujuan}"></td>
+                    <td>
+                        <div th:if="${lembur.statusPersetujuan == 0}">Menunggu Persetujuan</div>
+                        <div th:if="${lembur.statusPersetujuan == 1}">Ditolak</div>
+                        <div th:if="${lembur.statusPersetujuan == 2}">Disetujui</div>
+                    </td>
                     <td>
                         <div class="row">
                             <a th:href="@{/lembur/ubah/}+${lembur.id}"

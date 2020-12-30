@@ -12,7 +12,9 @@
 <div class="container p-5 m-auto position-relative min-vh-100">
     <div class="shadow m-auto bg-white rounded text-center">
         <h3 class="card-header bg-dark text-light">Daftar Lembur</h3>
-
+        <div>
+            <h4 style="color: red" th:text="${hapus}"></h4>
+        </div>
         <div class="card-body">
             <table class="table table-responsive-lg text-center">
                 <thead>
@@ -30,27 +32,37 @@
                 <tr th:if="${hasLembur && karyawan}" th:each="lembur, iterationStatus : ${listLembur}">
                     <td th:text="${iterationStatus.count}"></td>
                     <td th:text="${lembur.gaji.user.username}"></td>
+<!--                    <td th:text="${listUser.get(lembur.gaji.user.id)}"></td>-->
                     <td th:text="${lembur.waktuMulai}"></td>
                     <td th:text="${lembur.waktuSelesai}"></td>
                     <td th:text="${lembur.kompensasiPerJam}"></td>
-                    <td th:text="${lembur.statusPersetujuan}"></td>
+                    <td>
+                        <div th:if="${lembur.statusPersetujuan == 0}">Menunggu Persetujuan</div>
+                        <div th:if="${lembur.statusPersetujuan == 1}">Ditolak</div>
+                        <div th:if="${lembur.statusPersetujuan == 2}">Disetujui</div>
+                    </td>
                     <td>
                         <div class="row">
                             <a th:href="@{/lembur/ubah/}+${lembur.id}"
                                class="btn btn-warning text-light text-center m-auto pl-1 pr-1"
-                               sec:authorize="hasAnyAuthority('Kepala Departemen HR','Staff Payroll')">ubah</a>
+                               sec:authorize="hasAnyAuthority('Karyawan','Kepala Departemen HR','Staff Payroll')">ubah</a>
                             <a th:href="@{/lembur/hapus/}+${lembur.id}"
                                class="btn btn-danger text-light text-center m-auto"
-                               sec:authorize="hasAnyAuthority('Kepala Departemen HR','Staff Payroll')">hapus</a>
+                               sec:authorize="hasAnyAuthority('Karyawan','Kepala Departemen HR','Staff Payroll')">hapus</a>
                         </div>
                     </td>
                 <tr th:unless="${hasLembur && karyawan}" th:each="lembur, iterationStatus : ${listLembur}">
                     <td th:text="${iterationStatus.count}"></td>
-                    <td th:text="${lembur.gaji.user.username}"></td>
+<!--                    <td th:text="${lembur.gaji.user.username}"></td>-->
+                    <td th:text="${listUser.get(lembur.gaji.user.id)}"></td>
                     <td th:text="${lembur.waktuMulai}"></td>
                     <td th:text="${lembur.waktuSelesai}"></td>
                     <td th:text="${lembur.kompensasiPerJam}"></td>
-                    <td th:text="${lembur.statusPersetujuan}"></td>
+                    <td>
+                        <div th:if="${lembur.statusPersetujuan == 0}">Menunggu Persetujuan</div>
+                        <div th:if="${lembur.statusPersetujuan == 1}">Ditolak</div>
+                        <div th:if="${lembur.statusPersetujuan == 2}">Disetujui</div>
+                    </td>
                     <td>
                         <div class="row">
                             <a th:href="@{/lembur/ubah/}+${lembur.id}"

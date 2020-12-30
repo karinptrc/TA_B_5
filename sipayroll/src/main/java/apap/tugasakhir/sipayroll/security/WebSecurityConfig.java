@@ -20,7 +20,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
-                .antMatchers("/images/**").permitAll()
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/user/add").hasAuthority("Kepala Departemen HR")
                 .antMatchers("/gaji").hasAnyAuthority("Karyawan", "Kepala Departemen HR", "Staff Payroll")
@@ -34,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/lowongan/add").hasAuthority("Staff Payroll")
 
                 .antMatchers("/gaji/add","/gaji/update/**","/gaji/delete/**").hasAnyAuthority("Kepala Departemen HR", "Staff Payroll")
-                .antMatchers("/gaji/detail").hasAnyAuthority("Karyawan", "Kepala Departemen HR", "Staff Payroll")
+                .antMatchers("/gaji/detail/**").hasAnyAuthority("Karyawan", "Kepala Departemen HR", "Staff Payroll")
 
                 .anyRequest().authenticated()
                 .and()

@@ -22,11 +22,11 @@
         <table class="table">
             <tr>
                 <th>UUID User</th>
-                <td th:text="${userAssigned.keySet().toString().substring(1, userAssigned.keySet().toString().length()-1)}"></td>
+                <td th:text="${gaji.user.id}"></td>
             </tr>
             <tr>
                 <th>Nama Pegawai</th>
-                <td th:text="${userAssigned.get(user.getId())}"></td>
+                <td th:text="${userAssigned.get(gaji.user.id)}"></td>
             </tr>
             <tr>
                 <th>Gaji</th>
@@ -59,6 +59,8 @@
                 <!--                <td th:text="${}"></td>-->
             </tr>
         </table>
+        <a th:href="@{/gaji}"
+           class="btn btn-link text-left m-auto">Kembali</a>
     </div>
 </div>
 </body>

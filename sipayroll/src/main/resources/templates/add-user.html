@@ -9,7 +9,7 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar (pagetitle='Tambah Pengguna Baru')"></nav>
     <div class="container pm p-5 text-center position-relative min-vh-100">
-        <div class="shadow m-auto bg-white rounded w-50 card">
+        <div class="shadow m-auto bg-white rounded w-75 card">
             <div class="card-header bg-dark text-light p-0">Tambah Pengguna Baru</div>
             <div class="card-body text-left">
                 <form th:action="@{/user/add}" th:object="${pegawai}" method="POST">

@@ -57,7 +57,7 @@ public class LemburController {
             return "redirect:/lembur/add";
         }
     }
-    
+
     @GetMapping("/lembur/ubah/{id}")
     public String ubahLemburFormPage(@PathVariable Integer id, Model model){
         LemburModel lembur = lemburService.getLemburById(id);

@@ -39,4 +39,5 @@ public class LowonganRestServiceImpl implements LowonganRestService {
                     .bodyToMono(String.class);
                     // .block();
     }
+
 }

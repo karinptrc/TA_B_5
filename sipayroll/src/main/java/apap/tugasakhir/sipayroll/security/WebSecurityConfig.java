@@ -53,8 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
 //        auth.inMemoryAuthentication()
 //                .passwordEncoder(encoder())
-//                .withUser("user1").password(encoder().encode("coba1234"))
-//                .roles("USER");
+//                .withUser("admin").password(encoder().encode("admin1234"))
+//                .roles("Kepala Departemen HR");
 //    }
 
     @Autowired

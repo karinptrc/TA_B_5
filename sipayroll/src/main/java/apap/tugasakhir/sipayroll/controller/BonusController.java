@@ -64,7 +64,7 @@ public class BonusController {
             }
             return "redirect:/bonus/add";
         }catch (NullPointerException nullPointerException){
-            redir.addFlashAttribute("pesan","ID Gaji belum terdaftar! Penambahan bonus gagal!");
+            redir.addFlashAttribute("gagal","ID Gaji belum terdaftar! Penambahan bonus gagal!");
             return "redirect:/bonus/add";
         }
     }

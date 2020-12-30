@@ -1,14 +1,10 @@
 package apap.tugasakhir.sipayroll.rest;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @JsonIgnoreProperties(value={"roleName"},allowGetters = true)
 public class PegawaiDTO {
@@ -66,9 +62,7 @@ public class PegawaiDTO {
         this.noTelepon = noTelepon;
     }
 
-    public String getTempatLahir() {
-        return tempatLahir;
-    }
+    public String getTempatLahir() { return tempatLahir; }
 
     public void setTempatLahir(String tempatLahir) {
         this.tempatLahir = tempatLahir;

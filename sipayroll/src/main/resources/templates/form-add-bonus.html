@@ -15,28 +15,34 @@
         <div class="card-body m-auto pl-2 pr-2 text-left">
             <form th:action="@{/bonus/add}" th:object="${bonus}" method="POST">
                 UUID <br>
-                <select name="uuid" class="form-control">
+                <select name="uuid" class="form-control" required>
                     <option selected disabled>UUID</option>
                     <option th:each="user, iterationStatus : ${listUser}" th:text="${user.id}" th:value="${user.id}"></option>
                 </select>
                 <br>
                 Jenis Bonus <br>
-                <select name="jenisBonus" class="form-control">
+                <select name="jenisBonus" class="form-control" required>
                     <option selected disabled>Jenis Bonus</option>
                     <option th:each="jenis, iterationStatus : ${listJenisBonus}" th:text="${jenis.nama}" th:value="${jenis.id}"></option>
                 </select>
                 <br>
                 Tanggal Diberikan <br>
-                <input type = "date" class="form-control"  name="tanggal"/>
+                <input type = "date" class="form-control"  name="tanggal" required/>
                 <br>
                 <br><br><br><br>
                 <div class="row pb-3 pr-4 justify-content-end">
-                    <div class="pr-1"><button type="submit" name="batalTambah" class="bg-white border-dar rounded pt-1 pb-1 pl-3 pr-3">Batal</button></div>
+                    <div class="pr-1">
+                        <a th:href="@{/}" class="btn btn-link text-left m-auto">Kembali</a>
+<!--                        <button type="submit" name="batalTambah" th:href="@{/}" class="bg-white border-dar rounded pt-1 pb-1 pl-3 pr-3">Batal</button>-->
+                    </div>
                     <div><button type="submit" name="tambahBonus" class="bg-dark rounded text-light p-1">Tambah</button></div>
                 </div>
             </form>
             <div>
-                <h4 style="color: red" th:text="${pesan}"></h4>
+                <h4 style="color: green" th:text="${berhasil}"></h4>
+            </div>
+            <div>
+                <h4 style="color: red" th:text="${gagal}"></h4>
             </div>
         </div>
     </div>

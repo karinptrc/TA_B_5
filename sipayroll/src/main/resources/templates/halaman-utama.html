@@ -12,31 +12,39 @@
     <div class="container pm pt-5 min-vh-100">
         <div class="pl-5"><h2 th:text=" 'Hello ' + ${#httpServletRequest.remoteUser} + ' !'">Login as</h2></div>
         <div class="pl-5"><a type="submit" th:href="@{/user/profil}">Lihat Profil</a></div>
-        <div class="p-5 pm">
-            <h1 class="p-5 text-center bg-dark text-light m-auto card">Selamat Datang di SIPAYROLL!</h1></div>
-        <div class="justify-content-center">
-            <div class="m-auto p-5">
-                <div class="text-center m-auto col">
-                    <div class="text-center pb-3"><h3>Daftar Fitur:</h3></div>
-                    <div class="card-group row text-center">
-                        <div class="pm pl-2 pr-2 col" sec:authorize="hasAuthority('Kepala Departemen HR')" ><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-3 pr-3 pt-1 pb-2 rounded" th:href="@{/user/add}">Tambah Pengguna</a></div>
-                    </div><br>
-                    <div class="card-group row text-center" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll', 'Karyawan')">
-                        <div class="pm pl-2 pr-2 col"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-5 pr-5 pt-1 pb-2 rounded" th:href="@{/gaji}">Daftar Gaji</a></div>
-                        <div class="pm pl-2 pr-2 col" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll')"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{/gaji/add}">Tambah Gaji</a></div>
-                    </div><br>
-                    <div class="card-group row text-center" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll', 'Karyawan')">
-                        <div class="pm pl-2 pr-2 col"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{lembur/view}">Daftar Lembur</a></div>
-                        <div class="pm pl-2 pr-2 col" sec:authorize="hasAuthority('Karyawan')"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{/lembur/add}">Tambah Lembur</a></div>
-                    </div><br>
-                    <div class="card-group row text-center">
-                        <div class="pm pl-2 pr-2 col"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{/bonus/add}">Tambah Bonus</a></div>
-                        <div class="pm pl-2 pr-2 col" sec:authorize="hasAuthority('Staff Payroll')"><a type="submit" class="card text-decoration-none bg-dark text-light text-center m-auto pl-4 pr-4 pt-1 pb-2 rounded" th:href="@{/lowongan/add}">Request Lowongan</a></div>
-                    </div><br>
+        <div class="pl-5 pr-5 pt-5 pm justify-content-center">
+            <h1 class="p-5 text-center bg-dark text-light m-auto card">Selamat Datang di SISTEM INFORMASI KEUANGAN!</h1>
+        </div>
+        <div class="text-center pl-5 pr-5">
+            <img alt="logo sipayroll" src="../static/images/logo.png" th:src="@{images/logo.png}" width="300"/>
+            <div class="pl-5 pr-5 pb-3">
+                <div class="pl-5 pr-5"><div class="pl-5 pr-5">
+                    <div class="font-italic font-weight-bold">SIPAYROLL merupakan sistem informasi yang mengatur berbagai proses HR, seperti
+                pengelolaan gaji, pengelolaan rekrutmen, dan pengelolaan training</div>
+                </div></div>
+            </div>
+        </div>
+        <div class="justify-content-center pl-5 pr-5" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Kepala Bagian', 'Staff Payroll', 'Karyawan')">
+            <div class="text-center pb-3"><h3>Daftar Fitur:</h3></div>
+        </div>
+        <div class="pl-5 pr-5">
+            <div class="pl-5 pr-5">
+                <div class="pl-5 pr-5">
+                    <div class="col">
+                        <div class="card-group row justify-content-center text-center">
+                            <div class="col-md-3 col-md-offset-2 p-2" sec:authorize="hasAuthority('Kepala Departemen HR')" ><a type="submit" class="card text-decoration-none bg-dark text-light justify-content-center m-auto rounded" th:href="@{/user/add}" style="width: 120px; height: 120px;">Tambah Pengguna</a></div>
+                            <div class="col-md-3 col-md-offset-2 p-2" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll', 'Karyawan')"><a type="submit" class="card text-decoration-none bg-dark text-light justify-content-center m-auto rounded" th:href="@{/gaji}" style="width: 120px; height: 120px;">Daftar Gaji</a></div>
+                            <div class="col-md-3 col-md-offset-2 p-2" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll')"><a type="submit" class="card text-decoration-none bg-dark text-light justify-content-center m-auto rounded" th:href="@{/gaji/add}" style="width: 120px; height: 120px;">Tambah Gaji</a></div>
+                            <div class="col-md-3 col-md-offset-2 p-2" sec:authorize="hasAnyAuthority('Kepala Departemen HR', 'Staff Payroll', 'Karyawan')"><a type="submit" class="card text-decoration-none bg-dark text-light justify-content-center m-auto rounded" th:href="@{lembur/view}" style="width: 120px; height: 120px;">Daftar Lembur</a></div>
+                            <div class="col-md-3 col-md-offset-2 p-2" sec:authorize="hasAuthority('Karyawan')"><a type="submit" class="card text-decoration-none bg-dark text-light justify-content-center m-auto rounded" th:href="@{/lembur/add}" style="width: 120px; height: 120px;">Tambah Lembur</a></div>
+                            <div class="col-md-3 col-md-offset-2 p-2" sec:authorize="hasAnyAuthority('Kepala Bagian', 'Kepala Departemen HR')"><a type="submit" class="card text-decoration-none bg-dark text-light justify-content-center m-auto rounded" th:href="@{/bonus/add}" style="width: 120px; height: 120px;">Tambah Bonus</a></div>
+                            <div class="col-md-3 col-md-offset-2 p-2" sec:authorize="hasAuthority('Staff Payroll')"><a type="submit" class="card text-decoration-none bg-dark text-light justify-content-center m-auto rounded" th:href="@{/lowongan/add}" style="width: 120px; height: 120px;">Request Lowongan</a></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div><br><br><br>
     <footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 </html>

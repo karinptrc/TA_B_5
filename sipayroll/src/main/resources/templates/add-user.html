@@ -9,25 +9,25 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar (pagetitle='Tambah Pengguna Baru')"></nav>
     <div class="container pm p-5 text-center position-relative min-vh-100">
-        <div class="shadow m-auto bg-white rounded w-50 card">
+        <div class="shadow m-auto bg-white rounded w-75 card">
             <div class="card-header bg-dark text-light p-0">Tambah Pengguna Baru</div>
             <div class="card-body text-left">
                 <form th:action="@{/user/add}" th:object="${pegawai}" method="POST">
                     <div class="row form-group">
                         <label class="col-sm-4">Username:</label>
-                        <input type="text" class="col-sm-8 form-control input-sm" name="username" required>
+                        <input type="text" class="col-sm-8 form-control input-sm" name="username" placeholder="Masukan username" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Nama:</label>
-                        <input type="text" class="col-sm-8 form-control input-sm" name="nama" required>
+                        <input type="text" class="col-sm-8 form-control input-sm" name="nama" placeholder="Masukan nama" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Nomor Telepon:</label>
-                        <input type="text" class="col-sm-8 form-control input-sm" name="noTelepon" required>
+                        <input type="text" class="col-sm-8 form-control input-sm" name="noTelepon" placeholder="Masukan nomor telepon" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Tempat Lahir:</label>
-                        <input type="text" class="col-sm-8 form-control input-sm" name="tempatLahir" required>
+                        <input type="text" class="col-sm-8 form-control input-sm" name="tempatLahir" placeholder="Masukan tempat lahir" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Tanggal Lahir:</label>
@@ -35,11 +35,11 @@
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Alamat:</label>
-                        <input type="text" class="col-sm-8 form-control input-sm" name="alamat" required>
+                        <input type="text" class="col-sm-8 form-control input-sm" name="alamat" placeholder="Masukan alamat" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Password:</label>
-                        <input type="password" class="col-sm-8 form-control input-sm" name="password" required>
+                        <input type="password" class="col-sm-8 form-control input-sm" name="password" placeholder="Masukan password kombinasi huruf dan angka (min 8 karakter)" required>
                     </div>
                     <div class="row form-group">
                         <label  class="col-sm-4">Role:</label>

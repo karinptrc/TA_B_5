@@ -22,9 +22,17 @@ public class LowonganRestServiceImpl implements LowonganRestService {
     @Override
     public Mono<String> requestLowongan(LowonganDTO lowongan){
         System.out.println("berhasil kirim");
+        System.out.println(this.webClient
+                    .post()
+                    .uri("/lowongan/add")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .bodyValue(lowongan)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block());
         return this.webClient
                     .post()
-                    .uri("api/v1/lowongan/add")
+                    .uri("/lowongan/add")
                     .contentType(MediaType.APPLICATION_JSON)
                     .bodyValue(lowongan)
                     .retrieve()

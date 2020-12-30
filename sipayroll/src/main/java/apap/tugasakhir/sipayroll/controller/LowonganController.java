@@ -50,7 +50,6 @@ public class LowonganController {
         else{
             redir.addFlashAttribute("gagal", "Penambahan lowongan gagal!");
         }
-        // System.out.println(dataform);
         System.out.println(uuid);
         return "redirect:/lowongan/add";
     }

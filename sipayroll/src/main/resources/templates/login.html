@@ -10,16 +10,20 @@
 <body>
     <div class="container pm p-5 text-center position-relative min-vh-100">
         <div class="shadow m-auto bg-white rounded w-50 card">
-            <div class="card-header bg-dark text-light p-0">Log In</div>
+            <div class="card-header bg-dark text-light p-0">SIPAYROLL</div>
             <div class="card-body text-left">
+                <div class="text-center">
+                    <img alt="logo sipayroll" src="../static/images/logo.png" th:src="@{images/logo.png}" width="75"/>
+                    <div class="text-dark font-weight-bold">Log In</div>
+                </div><br>
                 <form th:action="@{/login}" method="POST">
                     <div class="row form-group">
                         <label class="col-sm-4">Username:</label>
-                        <input type="text" class="col-sm-8 form-control input-sm" name="username">
+                        <input type="text" class="col-sm-8 form-control input-sm" name="username" placeholder="Masukan username" required>
                     </div>
                     <div class="row form-group">
                         <label class="col-sm-4">Password:</label>
-                        <input type="password" class="col-sm-8 form-control input-sm" name="password">
+                        <input type="password" class="col-sm-8 form-control input-sm" name="password" placeholder="Masukan password" required>
                     </div>
                     <div class="row form-group justify-content-end">
                         <button type="submit" class="btn btn-dark">Sign In</button>
@@ -28,6 +32,7 @@
                 <div th:if="${param.error}">
                     <span style="color: red">Invalid username or password</span>
                 </div>
+                <div class="text-center text-secondary">&copy; 2020 Copyright</div>
             </div>
         </div>
     </div>

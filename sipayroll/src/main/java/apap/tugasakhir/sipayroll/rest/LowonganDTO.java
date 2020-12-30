@@ -14,7 +14,7 @@ public class LowonganDTO {
     @JsonProperty("jenisLowongan")
     private Long jenisLowongan;
 
-    @JsonProperty("jumlahKaryawan")
+    @JsonProperty("jumlah")
     private Integer jumlahKaryawan;
 
     // @JsonProperty("uuid")

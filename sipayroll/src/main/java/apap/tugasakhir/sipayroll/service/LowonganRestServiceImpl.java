@@ -24,7 +24,7 @@ public class LowonganRestServiceImpl implements LowonganRestService {
         System.out.println("berhasil kirim");
         return this.webClient
                     .post()
-                    .uri("api/v1/lowongan/add")
+                    .uri("/lowongan/add")
                     .contentType(MediaType.APPLICATION_JSON)
                     .bodyValue(lowongan)
                     .retrieve()

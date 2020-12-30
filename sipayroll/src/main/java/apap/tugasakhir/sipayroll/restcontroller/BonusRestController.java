@@ -1,7 +1,5 @@
 package apap.tugasakhir.sipayroll.restcontroller;
 
-import apap.tugasakhir.sipayroll.model.BonusModel;
-import apap.tugasakhir.sipayroll.model.LaporanPesertaPelatihanModel;
 import apap.tugasakhir.sipayroll.rest.BaseResponseLaporan;
 import apap.tugasakhir.sipayroll.rest.LaporanDTO;
 import apap.tugasakhir.sipayroll.service.BonusRestService;

@@ -32,6 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/bonus/add").hasAnyAuthority("Kepala Bagian Pelatihan", "Kepala Departemen HR")
                 .antMatchers("/lowongan/add").hasAuthority("Staff Payroll")
 
+                .antMatchers("/gaji/add","/gaji/update/**","/gaji/delete/**").hasAnyAuthority("Kepala Departemen HR", "Staff Payroll")
+                .antMatchers("/gaji/detail").hasAnyAuthority("Karyawan", "Kepala Departemen HR", "Staff Payroll")
+
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

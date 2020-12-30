@@ -25,10 +25,10 @@
             <form th:action="@{/lembur/ubah}" th:object="${lembur}" method="POST">
                 <input type="hidden" th:field="*{id}">
                 Waktu Mulai <br>
-                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuMulai" th:value="*{{waktuMulai}}"/>
+                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuMulai" th:value="*{{waktuMulai}}" readonly/>
                 <br>
                 Waktu Selesai <br>
-                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuSelesai" th:value="*{{waktuSelesai}}"/>
+                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuSelesai" th:value="*{{waktuSelesai}}" readonly/>
                 <br>
                 <label for="statusPersetujuan">Status Persetujuan</label>
                 <select class="custom-select form-control" name="statusPersetujuan" th:field="*{statusPersetujuan}" disabled>
@@ -64,12 +64,14 @@
                 Waktu Selesai <br>
                 <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuSelesai" th:value="*{{waktuSelesai}}" readonly/>
                 <br>
-                Status Persetujuan<br>
-                <select name="statusPersetujuan" th:field="*{{statusPersetujuan}}"class="form-control">
+                <label for="statusPersetujuan">Status Persetujuan</label>
+                <select class="custom-select form-control" name="statusPersetujuan" th:field="*{statusPersetujuan}" disabled>
                     <option value="0">Menunggu Persetujuan</option>
                     <option value="1">Ditolak</option>
                     <option value="2">Setuju</option>
                 </select>
+                <input type="hidden" name="statusPersetujuan" class="form-control" th:value="*{{statusPersetujuan}}">
+                <br>
                 <br>
                 <div class="row pb-3 pr-4 justify-content-end">
                     <div><button type="submit" name="tambahLembur" class="bg-dark rounded text-light p-1">Ubah</button></div>
@@ -96,12 +98,13 @@
                 Waktu Selesai <br>
                 <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuSelesai" th:value="*{{waktuSelesai}}" readonly/>
                 <br>
-                Status Persetujuan<br>
-                <select name="statusPersetujuan" th:field="*{{statusPersetujuan}}" class="form-control">
+                <select class="custom-select form-control" name="statusPersetujuan" th:field="*{statusPersetujuan}" disabled>
                     <option value="0">Menunggu Persetujuan</option>
                     <option value="1">Ditolak</option>
                     <option value="2">Setuju</option>
                 </select>
+                <input type="hidden" name="statusPersetujuan" class="form-control" th:value="*{{statusPersetujuan}}">
+                <br>
                 <br>
                 <div class="row pb-3 pr-4 justify-content-end">
                     <div><button type="submit" name="tambahLembur" class="bg-dark rounded text-light p-1">Ubah</button></div>
@@ -112,7 +115,7 @@
     <br>
     <h5 th:text="${berhasil}" style="color: green;"></h5>
     </div>
-    </div>
+</div>
     <!-- <br> -->
     <!-- <h5 th:text="${gagal}" style="color: red;"></h5> -->
 </div>

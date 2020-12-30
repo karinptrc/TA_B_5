@@ -58,12 +58,10 @@
     </nav>
     <footer th:fragment="footer" class="container-fluid justify-content-center card-footer bg-dark">
         <div><p class="text-center text-light" th:text="'Last accessed on ' + ${#temporals.format(dateTime, 'dd-MM-yyyy HH:mm:ss')}"></p></div>
-        <div><p class="text-center text-light">Made with Love by</p><br>
-            <p class="text-center text-light">Hamam Abdurrachman</p>
-            <p class="text-center text-light">Hanna Jannatunna'iim</p>
-            <p class="text-center text-light">Karin Patricia</p>
-            <p class="text-center text-light">Muhammad Marandi Millendila Efendi</p>
-            <p class="text-center text-light">Syanne Limarwan</p>
+        <div class="m-auto pl-5 pr-5">
+            <div class="text-center text-light">&copy; 2020 Copyright</div>
+            <div class="text-center text-light">Made with &#x2764; by | Hamam Abdurrachman |  Hanna Jannatunna'iim | Karin Patricia | Muhammad Marandi Millendila Efendi | Syanne Limarwan</div>
+            <div class="text-center text-light">Fakultas Ilmu Komputer | Universitas Indonesia</div>
         </div>
     </footer>
 </body>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +26,9 @@ public class BonusServiceImplementation implements BonusService{
 
     @Override
     public boolean addBonus(BonusModel bonus, GajiModel gaji, JenisBonusModel jenis) {
+        int year =  bonus.getTanggal().getYear();
         if (jenis.getId() == 1){
-            if (validateBonus(gaji, jenis.getId())){
+            if (validateBonus(gaji, jenis.getId(), year)){
                 bonus.setGaji(gaji);
                 gaji.getListBonus().add(bonus);
                 bonus.setJenis(jenis);
@@ -35,7 +37,7 @@ public class BonusServiceImplementation implements BonusService{
                 return false;
             }
         }else if (jenis.getId() == 2){
-            if (validateBonus(gaji, jenis.getId())){
+            if (validateBonus(gaji, jenis.getId(), year)){
                 bonus.setGaji(gaji);
                 gaji.getListBonus().add(bonus);
                 bonus.setJenis(jenis);
@@ -82,10 +84,17 @@ public class BonusServiceImplementation implements BonusService{
         return bonusDb.findByGajiId(id);
     }
 
-    public boolean validateBonus(GajiModel gaji, Integer jenis){
+    public boolean validateBonus(GajiModel gaji, Integer jenis, Integer tahunBonus){
         if (!(gaji.getListBonus().isEmpty())){
             List<BonusModel> listBonus = gaji.getListBonus();
-            for (BonusModel bonus : listBonus){
+            List<BonusModel> listBonusTahunSama = new ArrayList<>();
+            for (BonusModel bonus: listBonus){
+                int tahun = bonus.getTanggal().getYear();
+                if (tahun == tahunBonus){
+                    listBonusTahunSama.add(bonus);
+                }
+            }
+            for (BonusModel bonus : listBonusTahunSama){
                 System.out.println("tes " + bonus.getJenis().getId());
                 if (bonus.getJenis().getId() == jenis){
                     return false;

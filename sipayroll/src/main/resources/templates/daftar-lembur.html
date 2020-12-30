@@ -10,6 +10,9 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar (pagetitle='Daftar Lembur')"></nav>
 <div class="container p-5 m-auto position-relative min-vh-100">
+    <div sec:authorize="hasAuthority('Karyawan')">
+    <a th:href="@{/lembur/add}" class="btn bg-dark text-light mb-1"> + Tambah Lembur </a>
+    </div>
     <div class="shadow m-auto bg-white rounded text-center">
         <h3 class="card-header bg-dark text-light">Daftar Lembur</h3>
         <div>

@@ -22,10 +22,10 @@
         <div class="card-body m-auto pl-2 pr-2 text-left">
             <form th:action="@{/lembur/add}" th:object="${lembur}" method="POST">
                 Waktu Mulai <br>
-                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuMulai"/>
+                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuMulai" required/>
                 <br>
                 Waktu Selesai <br>
-                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuSelesai"/>
+                <input type="datetime-local" pattern="dd/mm/yyyy, HH:mm" class="form-control" name="waktuSelesai" required/>
                 <br>
                 Kompensasi Per Jam<br>
                 <input type="number" class="form-control" name="kompensasiPerJam" placeholder="Rp120.000 Per Jam" disabled>
